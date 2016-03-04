@@ -26,7 +26,7 @@ escena.add(piernaI);
 camara = new THREE.PerspectiveCamera();
 camara.position.z= 20;
 renderer = new THREE.WebGLRenderer();
-renderer.setsize( window.innerHeight*.95,window.innerHeight*.95 );
+renderer.setSize( window.innerHeight*.95,window.innerHeight*.95 );
 document.body.appendChild( renderer.domElement);
 }
 function loop(){
