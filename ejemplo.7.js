@@ -1,4 +1,4 @@
-funtion setup(){
+function setup(){
 THREE.ImageUtils.crossOrigin ='';
 var textura =THREE.ImageUtils.loadTexture('http://threejs.org/examples/textures/brick_diffuse.jpg');
 var material=new THREE.MeshLambertMaterial({map: textura});
@@ -21,7 +21,7 @@ renderer = new THREE.WebGLRenderer();
 
 renderer.setSize(window.innerHeight*.95,window.innerHeight*.95);
 document.body.appendChild( renderer.domElement);
-
+}
 function loop(){
 
 requestAnimationFrame( loop);
