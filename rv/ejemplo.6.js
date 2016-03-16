@@ -1,5 +1,5 @@
 funtion setup(){
-THREE.ImageUtils.crossOrigin =' ';
+THREE.ImageUtils.crossOrigin =' '
 var textura =THREE.ImageUtils.loadTexture('http//three.js.org/examples/textures/crate.gif')
 var material=new THREE.MeshBasicMaterial({map: textura});
 var forma= new THREE.BoxGeometry(1,1,1); 
