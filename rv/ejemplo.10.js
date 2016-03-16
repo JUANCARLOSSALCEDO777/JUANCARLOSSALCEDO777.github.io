@@ -7,9 +7,9 @@ malla = new THREE.Mesh (forma,material);
 malla.rotation.z +=0.25;
 
 var luzPuntual = new THREE.PointLight(0xFFFFFF);
-luzPuntual.position.x=0;
-luzPuntual.position.y=0;
-luzPuntual.position.z=0;
+luzPuntual.position.x=10;
+luzPuntual.position.y=10;
+luzPuntual.position.z=10;
 
 
 
