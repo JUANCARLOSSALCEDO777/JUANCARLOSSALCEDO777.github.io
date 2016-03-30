@@ -19,7 +19,7 @@ escena.add(cubo2);
 escena.add(pelota);
 escena.add(camara);
 
-renderer = THREE.WebGLRenderer();
+renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerHeight*.95,window.innerHeight*.95);
 document.body.appendChild(renderer.domElement);
 step=0.01;
