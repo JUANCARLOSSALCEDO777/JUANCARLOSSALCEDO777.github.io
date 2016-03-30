@@ -4,8 +4,8 @@ cubo1 = new THREE.Mesh( new THREE.BoxGeometry(1,1,1),new THREE.MeshNormalMateria
 cubo2 = new THREE.Mesh( new THREE.BoxGeometry(1,1,1),new THREE.MeshNormalMaterial());
 pelota = new THREE.Mesh( new THREE.SphereGeometry(0.5),new THREE.MeshNormalMaterial());
 
-cubo1.position.x= .5;
-cubo2.position.x= -.6;
+cubo1.position.x= 5;
+cubo2.position.x= -1;
 
 camara = new THREE.PerspectiveCamera();
 camara.position.z=20
