@@ -4,7 +4,7 @@ var texturacaja =THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.githu
 var materialcaja=new THREE.MeshBasicMaterial({map: texturacaja});
 var forma= new THREE.BoxGeometry(12,4,8); 
 malla = new THREE.Mesh (forma,materialcaja);
-
+malla.position.x=5;
 escena = new THREE.Scene();
 escena.add(malla);
 camara = new THREE.PerspectiveCamera();
@@ -17,8 +17,8 @@ document.body.appendChild( renderer.domElement);
 function loop(){
 
 requestAnimationFrame( loop);
-malla.rotation.x +=0.01;
-malla.rotation.y +=0.01;
+malla.rotation.x +=0.0;
+malla.rotation.y +=0.0;
 
 
 renderer.render(escena,camara);
