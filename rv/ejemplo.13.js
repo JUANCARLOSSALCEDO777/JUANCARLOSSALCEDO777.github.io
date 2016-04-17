@@ -13,7 +13,7 @@ escena.add(caja1);
 escena.add(caja2);
 
 camara = new THREE.PerspectiveCamera();
-camara.position.z=51;
+camara.position.z=11;
 camara.position.x=31;
 camara.position.y=31;
 camara.lookAt( escena.position );
