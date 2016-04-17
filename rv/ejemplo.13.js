@@ -13,9 +13,9 @@ escena.add(caja1);
 escena.add(caja2);
 
 camara = new THREE.PerspectiveCamera();
-camara.position.z=-31;
+camara.position.z=0;
 camara.position.x=0;
-camara.position.y=0;
+camara.position.y=-31;
 camara.lookAt( escena.position );
 renderer = new THREE.WebGLRenderer();
 
