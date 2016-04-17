@@ -14,6 +14,7 @@ escena.add(caja2);
 
 camara = new THREE.PerspectiveCamera();
 camara.position.z=51;
+camara.position.x=31;
 renderer = new THREE.WebGLRenderer();
 
 renderer.setSize(window.innerHeight*.95,window.innerHeight*.95);
@@ -22,8 +23,8 @@ document.body.appendChild( renderer.domElement);
 function loop(){
 
 requestAnimationFrame( loop);
-camara.rotation.x +=0.1;
-camara.rotation.y +=0.1;
+caja1.rotation.x +=0.0;
+caja1.rotation.y +=0.0;
 
 
 renderer.render(escena,camara);
