@@ -17,7 +17,7 @@ camara.position.z=0;
 camara.position.x=0;
 camara.position.y=-31;
 camara.lookAt( escena.position );
-camara.rotation.y +=0.5;
+
 renderer = new THREE.WebGLRenderer();
 
 renderer.setSize(window.innerHeight*.95,window.innerHeight*.95);
@@ -28,7 +28,7 @@ function loop(){
 requestAnimationFrame( loop);
 caja1.rotation.x +=0.0;
 caja1.rotation.y +=0.0;
-
+camara.rotation.y +=0.01;
 
 renderer.render(escena,camara);
 }
