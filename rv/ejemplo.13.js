@@ -2,7 +2,7 @@ function setup(){
 THREE.ImageUtils.crossOrigin ='';
 var texturacaja =THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/metal.jpg');
 var materialcaja=new THREE.MeshBasicMaterial({map: texturacaja});
-var forma= new THREE.BoxGeometry(5,5,5); 
+var forma= new THREE.BoxGeometry(5,11,5); 
 malla = new THREE.Mesh (forma,materialcaja);
 
 escena = new THREE.Scene();
