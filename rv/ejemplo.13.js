@@ -1,6 +1,6 @@
 function setup(){
 THREE.ImageUtils.crossOrigin ='';
-var textura =THREE.ImageUtils.loadTexture('http://images.all-free-download.com/images/graphiclarge/metal_steel_highdefinition_picture_11_169636.jpg');
+var textura =THREE.ImageUtils.loadTexture('http://threejs.org/examples/textures/crate.gif');
 var material=new THREE.MeshBasicMaterial({map: textura});
 var forma= new THREE.BoxGeometry(5,5,5); 
 malla = new THREE.Mesh (forma,material);
