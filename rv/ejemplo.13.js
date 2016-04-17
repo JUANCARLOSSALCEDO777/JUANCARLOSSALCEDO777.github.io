@@ -2,6 +2,7 @@ function setup(){
 THREE.ImageUtils.crossOrigin ='';
 var texturacaja =THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/metal.jpg');
 var materialcaja=new THREE.MeshBasicMaterial({map: texturacaja});
+var ejes=new THREE.AxisHelper( 35 );
 
 var forma1= new THREE.BoxGeometry(12,4,8); 
 var forma2= new THREE.BoxGeometry(2,6,2); 
@@ -11,6 +12,7 @@ caja2.position.x=7;
 escena = new THREE.Scene();
 escena.add(caja1);
 escena.add(caja2);
+escena.add(ejes);
 
 camara = new THREE.PerspectiveCamera();
 camara.position.z=0;
