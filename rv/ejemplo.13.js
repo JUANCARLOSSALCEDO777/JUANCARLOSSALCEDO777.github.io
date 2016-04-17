@@ -4,7 +4,7 @@ var texturacaja =THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.githu
 var materialcaja=new THREE.MeshBasicMaterial({map: texturacaja});
 
 var forma1= new THREE.BoxGeometry(12,4,8); 
-var forma2= new THREE.BoxGeometry(2,6,); 
+var forma2= new THREE.BoxGeometry(2,6,2); 
 caja1 = new THREE.Mesh (forma,materialcaja);
 caja2 = new THREE.Mesh (forma2,materialcaja);
 caja2.position.x=7;
