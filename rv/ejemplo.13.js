@@ -1,6 +1,6 @@
 function setup(){
 THREE.ImageUtils.crossOrigin ='';
-var textura =THREE.ImageUtils.loadTexture('http://lostandtaken.com/wp-content/uploads/edd/2016/02/scratched-and-scraped-metal-texture-8-1560x2080.jpg');
+var textura =THREE.ImageUtils.loadTexture('http://images.all-free-download.com/images/graphiclarge/metal_steel_highdefinition_picture_11_169636.jpg');
 var material=new THREE.MeshBasicMaterial({map: textura});
 var forma= new THREE.BoxGeometry(5,5,5); 
 malla = new THREE.Mesh (forma,material);
