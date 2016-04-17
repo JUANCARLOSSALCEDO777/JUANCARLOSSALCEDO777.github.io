@@ -15,9 +15,9 @@ escena.add(caja2);
 escena.add(ejes);
 
 camara = new THREE.PerspectiveCamera();
-camara.position.z=0;
+camara.position.z=31;
 camara.position.x=31;
-camara.position.y=0;
+camara.position.y=31;
 camara.lookAt( escena.position );
 
 renderer = new THREE.WebGLRenderer();
@@ -28,9 +28,9 @@ document.body.appendChild( renderer.domElement);
 function loop(){
 
 requestAnimationFrame( loop);
-caja1.rotation.x +=0.0;
+caja1.rotation.x +=0.01;
 caja1.rotation.y +=0.0;
-camara.rotation.z +=0.01;
+camara.rotation.z +=0.0;
 
 renderer.render(escena,camara);
 }
