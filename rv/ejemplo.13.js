@@ -1,9 +1,9 @@
 function setup(){
 THREE.ImageUtils.crossOrigin ='';
-var textura =THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/metal.jpg');
-var material=new THREE.MeshBasicMaterial({map: textura});
+var texturacaja =THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/metal.jpg');
+var materialcaja=new THREE.MeshBasicMaterial({map: texturacaja});
 var forma= new THREE.BoxGeometry(5,5,5); 
-malla = new THREE.Mesh (forma,material);
+malla = new THREE.Mesh (forma,materialcaja);
 
 escena = new THREE.Scene();
 escena.add(malla);
@@ -17,8 +17,7 @@ document.body.appendChild( renderer.domElement);
 function loop(){
 
 requestAnimationFrame( loop);
-malla.rotation.x +=0.01;
-malla.rotation.y +=0.01;
+
 
 renderer.render(escena,camara);
 }
