@@ -6,7 +6,7 @@ var ejes=new THREE.AxisHelper( 35 );
 
 var forma1= new THREE.BoxGeometry(12,4,8); 
 var forma2= new THREE.BoxGeometry(2,6,2); 
-var llantaext = new THREE.CylinderGeometry( 1, 1, 2, 32, 1,0,THREE.Math.PI,(THREE.Math.PI)*2 );
+var llantaext = new THREE.CylinderGeometry( 1, 1, 2, 32, 1,(THREE.Math.PI)*2 );
 llantaext1= new THREE.Mesh (llantaext,materialcaja);
 caja1 = new THREE.Mesh (forma1,materialcaja);
 caja2 = new THREE.Mesh (forma2,materialcaja);
