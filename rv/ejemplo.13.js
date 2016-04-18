@@ -43,7 +43,7 @@ function loop(){
 requestAnimationFrame( loop);
 caja1.rotation.x +=0.01;
 caja1.rotation.y +=0.0;
-llantaext1.rotation.z +=0.0;
+llantaext1.rotation.z +=0.01;
 camara.rotation.z +=0.0;
 
 renderer.render(escena,camara);
