@@ -12,6 +12,9 @@ var llantaext  = new THREE.CylinderGeometry( 1, 1, 2, 32,1,false,0,(Math.PI) );
 
 llantaext1= new THREE.Mesh (llantaext,materialllanta);
 llantaext1.rotation.z +=Math.PI/2;
+llantaext1.position.x=7;
+llantaext1.position.z=-3;
+llantaext1.position.y=9;
 caja1 = new THREE.Mesh (forma1,materialcaja);
 caja2 = new THREE.Mesh (forma2,materialcaja);
 caja3 = new THREE.Mesh (forma2,materialcaja);
@@ -19,6 +22,7 @@ caja2.position.x=7;
 caja2.position.z=-3;
 caja3.position.x=-7;
 caja3.position.z=-3;
+
 
 llantaext1.position.z=9;
 escena = new THREE.Scene();
