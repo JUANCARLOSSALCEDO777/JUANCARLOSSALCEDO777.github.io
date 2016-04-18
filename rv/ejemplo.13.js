@@ -6,6 +6,8 @@ var ejes=new THREE.AxisHelper( 35 );
 
 var forma1= new THREE.BoxGeometry(12,4,8); 
 var forma2= new THREE.BoxGeometry(2,6,2); 
+var llantaext = new THREE.CylinderGeometry( 1, 1, 2, 32, 1,0,THREE.Math.PI,(THREE.Math.PI)*2 );
+llantaext1= new THREE.Mesh (llantaext,materialcaja);
 caja1 = new THREE.Mesh (forma1,materialcaja);
 caja2 = new THREE.Mesh (forma2,materialcaja);
 caja3 = new THREE.Mesh (forma2,materialcaja);
@@ -13,10 +15,13 @@ caja2.position.x=7;
 caja2.position.z=-3;
 caja3.position.x=-7;
 caja3.position.z=-3;
+
+llantaext1.position.z=5;
 escena = new THREE.Scene();
 escena.add(caja1);
 escena.add(caja2);
 escena.add(caja3);
+escena.add(llantaext1);
 escena.add(ejes);
 
 camara = new THREE.PerspectiveCamera();
