@@ -26,9 +26,9 @@ escena.add(llantaext1);
 escena.add(ejes);
 
 camara = new THREE.PerspectiveCamera();
-camara.position.z=31;
+camara.position.z=0;
 camara.position.x=31;
-camara.position.y=31;
+camara.position.y=0;
 camara.lookAt( escena.position );
 
 renderer = new THREE.WebGLRenderer();
