@@ -9,6 +9,7 @@ var forma2= new THREE.BoxGeometry(2,6,2);
 caja1 = new THREE.Mesh (forma1,materialcaja);
 caja2 = new THREE.Mesh (forma2,materialcaja);
 caja2.position.x=7;
+caja2.position.z=-3;
 escena = new THREE.Scene();
 escena.add(caja1);
 escena.add(caja2);
