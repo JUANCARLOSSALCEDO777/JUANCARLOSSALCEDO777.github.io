@@ -26,13 +26,15 @@ llantaext3= new THREE.Mesh (llantaext,materialllanta);
 llantaext3.position.x=-7;
 llantaext3.position.y=-3;
 llantaext3.position.z=-3;
-
+llantaext3.rotation.z +=Math.PI/2;
+llantaext3.rotation.x +=Math.PI/2;
 
 llantaext4= new THREE.Mesh (llantaext,materialllanta);
 llantaext4.position.x=7;
 llantaext4.position.y=-3;
 llantaext4.position.z=-3;
-
+llantaext4.rotation.z +=Math.PI/2;
+llantaext4.rotation.x +=Math.PI/2;
 caja1 = new THREE.Mesh (forma1,materialcaja);
 caja2 = new THREE.Mesh (forma2,materialcaja);
 caja3 = new THREE.Mesh (forma2,materialcaja);
