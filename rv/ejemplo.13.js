@@ -69,7 +69,7 @@ renderer.setSize(window.innerHeight*.95,window.innerHeight*.95);
 document.body.appendChild( renderer.domElement);
 }
 function loop(){
-
+requestAnimationFrame( loop);
 
 	theta += 0.1;
 	camara.position.x = 31 * Math.cos( THREE.Math.degToRad( theta ) );
@@ -79,12 +79,12 @@ caja1.rotation.x +=0.01;
 caja1.rotation.y +=0.0;
 
 
-requestAnimationFrame( loop);
+
 
 renderer.render(escena,camara);
 }
 
 var camara,escena,renderer,malla;
-var theta = 0;
+
 setup();
 loop();
