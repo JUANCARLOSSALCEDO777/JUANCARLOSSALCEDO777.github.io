@@ -27,14 +27,14 @@ llantaext3.position.x=-7;
 llantaext3.position.y=-3;
 llantaext3.position.z=-3;
 llantaext3.rotation.z +=Math.PI/2;
-llantaext3.rotation.x +=Math.PI/2;
+llantaext3.rotation.x +=Math.PI;
 
 llantaext4= new THREE.Mesh (llantaext,materialllanta);
 llantaext4.position.x=7;
 llantaext4.position.y=-3;
 llantaext4.position.z=-3;
 llantaext4.rotation.z +=Math.PI/2;
-llantaext4.rotation.x +=Math.PI/2;
+llantaext4.rotation.x +=Math.PI;
 caja1 = new THREE.Mesh (forma1,materialcaja);
 caja2 = new THREE.Mesh (forma2,materialcaja);
 caja3 = new THREE.Mesh (forma2,materialcaja);
@@ -67,8 +67,11 @@ renderer.setSize(window.innerHeight*.95,window.innerHeight*.95);
 document.body.appendChild( renderer.domElement);
 }
 function loop(){
-
 requestAnimationFrame( loop);
+	theta += 0.1;
+	camara.position.x = 31 * Math.sin( THREE.Math.degToRad( theta ) );
+	camara.position.y = 31* Math.sin( THREE.Math.degToRad( theta ) );
+	camara.lookAt( escena.position );
 caja1.rotation.x +=0.01;
 caja1.rotation.y +=0.0;
 llantaext1.rotation.z +=0.0;
