@@ -85,5 +85,6 @@ renderer.render(escena,camara);
 }
 
 var camara,escena,renderer,malla;
+var theta = 0;
 setup();
 loop();
