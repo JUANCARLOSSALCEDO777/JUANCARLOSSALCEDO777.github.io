@@ -28,7 +28,7 @@ document.body.appendChild( renderer.domElement);
 function loop(){
 
 requestAnimationFrame( loop);
-caja1.rotation.x +=0.01;
+caja1.rotation.x +=0.0;
 caja1.rotation.y +=0.0;
 camara.rotation.z +=0.0;
 
