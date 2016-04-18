@@ -16,6 +16,23 @@ llantaext1.position.y=3;
 llantaext1.position.z=-3;
 llantaext1.rotation.z +=Math.PI/2;
 
+llantaext2= new THREE.Mesh (llantaext,materialllanta);
+llantaext2.position.x=-7;
+llantaext2.position.y=3;
+llantaext2.position.z=-3;
+llantaext2.rotation.z +=Math.PI/2;
+
+llantaext3= new THREE.Mesh (llantaext,materialllanta);
+llantaext3.position.x=-7;
+llantaext3.position.y=-3;
+llantaext3.position.z=-3;
+
+
+llantaext4= new THREE.Mesh (llantaext,materialllanta);
+llantaext4.position.x=7;
+llantaext4.position.y=-3;
+llantaext4.position.z=-3;
+
 caja1 = new THREE.Mesh (forma1,materialcaja);
 caja2 = new THREE.Mesh (forma2,materialcaja);
 caja3 = new THREE.Mesh (forma2,materialcaja);
@@ -31,6 +48,9 @@ escena.add(caja1);
 escena.add(caja2);
 escena.add(caja3);
 escena.add(llantaext1);
+escena.add(llantaext2);
+escena.add(llantaext3);
+escena.add(llantaext4);
 escena.add(ejes);
 
 camara = new THREE.PerspectiveCamera();
