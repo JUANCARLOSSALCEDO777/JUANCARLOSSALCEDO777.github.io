@@ -69,6 +69,7 @@ renderer.setSize(window.innerHeight*.95,window.innerHeight*.95);
 document.body.appendChild( renderer.domElement);
 }
 function loop(){
+	var theta = 0;
 requestAnimationFrame( loop);
 	theta += 0.1;
 	camara.position.x = 31 * Math.sin( THREE.Math.degToRad( theta ) );
