@@ -68,6 +68,7 @@ renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerHeight*.95,window.innerHeight*.95);
 document.body.appendChild( renderer.domElement);
 }
+var theta = 0;
 function loop(){
 requestAnimationFrame( loop);
 
