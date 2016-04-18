@@ -77,8 +77,9 @@ requestAnimationFrame( loop);
 	camara.lookAt( escena.position );
 caja1.rotation.x +=0.01;
 caja1.rotation.y +=0.0;
-llantaext1.rotation.z +=0.0;
-camara.rotation.z +=0.0;
+
+
+requestAnimationFrame( loop);
 
 renderer.render(escena,camara);
 }
