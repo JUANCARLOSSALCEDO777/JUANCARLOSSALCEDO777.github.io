@@ -16,6 +16,7 @@ caja3.position.z=-3;
 escena = new THREE.Scene();
 escena.add(caja1);
 escena.add(caja2);
+escena.add(caja3);
 escena.add(ejes);
 
 camara = new THREE.PerspectiveCamera();
