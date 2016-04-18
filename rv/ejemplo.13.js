@@ -70,7 +70,7 @@ document.body.appendChild( renderer.domElement);
 }
 function loop(){
 	var theta = 0;
-requestAnimationFrame( loop);
+
 	theta += 0.1;
 	camara.position.x = 31 * Math.cos( THREE.Math.degToRad( theta ) );
 	camara.position.y = 31 * Math.sin( THREE.Math.degToRad( theta ) );
