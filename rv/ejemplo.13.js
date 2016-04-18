@@ -78,8 +78,7 @@ requestAnimationFrame( loop);
 	camara.position.y = 31 * Math.sin( THREE.Math.degToRad( theta ) );
 	camara.lookAt( escena.position );
 caja1.rotation.x +=0.0;
-caja2.rotation.x +=0.01;
-caja3.rotation.x +=0.01;
+
 caja1.rotation.y +=0.0;
 
 
