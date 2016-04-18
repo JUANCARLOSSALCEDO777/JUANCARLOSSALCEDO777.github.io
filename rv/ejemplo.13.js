@@ -3,7 +3,8 @@ THREE.ImageUtils.crossOrigin ='';
 var theta = 0;
 var texturacaja =THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/metal.jpg');
 var materialcaja=new THREE.MeshBasicMaterial({map: texturacaja});
-var materialllanta=new THREE.MeshBasicMaterial({color: 0xffffff}); 
+var texturallanta=THREE.ImageUtils.loadTexture('http://raw.githubusercontent.com/JUANCARLOSSALCEDO777/JUANCARLOSSALCEDO777.github.io/master/rv/texturas/llanta%20oruga.png');
+var materialllanta=new THREE.MeshBasicMaterial({map: texturallanta}); 
 var ejes=new THREE.AxisHelper( 35 );
 
 
