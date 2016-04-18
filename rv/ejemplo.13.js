@@ -72,8 +72,8 @@ function loop(){
 	var theta = 0;
 requestAnimationFrame( loop);
 	theta += 0.1;
-	camara.position.x = 31 * Math.sin( THREE.Math.degToRad( theta ) );
-	camara.position.y = 31* Math.sin( THREE.Math.degToRad( theta ) );
+	camara.position.x = 31 * Math.cos( THREE.Math.degToRad( theta ) );
+	camara.position.y = 31 * Math.sin( THREE.Math.degToRad( theta ) );
 	camara.lookAt( escena.position );
 caja1.rotation.x +=0.01;
 caja1.rotation.y +=0.0;
