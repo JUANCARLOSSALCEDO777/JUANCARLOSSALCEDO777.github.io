@@ -12,7 +12,7 @@ var llantaext  = new THREE.CylinderGeometry( 1, 1, 2, 32,1,false,0,(Math.PI) );
 
 llantaext1= new THREE.Mesh (llantaext,materialllanta);
 llantaext1.position.x=7;
-llantaext1.position.y=3;
+llantaext1.position.y=21;
 llantaext1.position.z=0;
 llantaext1.rotation.z +=Math.PI/2;
 
