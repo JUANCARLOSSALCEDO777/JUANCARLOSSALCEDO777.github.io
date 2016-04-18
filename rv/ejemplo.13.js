@@ -8,9 +8,10 @@ var ejes=new THREE.AxisHelper( 35 );
 var forma1= new THREE.BoxGeometry(12,4,8); 
 var forma2= new THREE.BoxGeometry(2,6,2); 
 var llantaext  = new THREE.CylinderGeometry( 1, 1, 2, 32,1,false,0,(Math.PI) );
-llantaext.thetaLength=THREE.Math.PI;
+
 
 llantaext1= new THREE.Mesh (llantaext,materialllanta);
+llantaext1.rotation.z +=Math.PI/2;
 caja1 = new THREE.Mesh (forma1,materialcaja);
 caja2 = new THREE.Mesh (forma2,materialcaja);
 caja3 = new THREE.Mesh (forma2,materialcaja);
@@ -43,7 +44,7 @@ function loop(){
 requestAnimationFrame( loop);
 caja1.rotation.x +=0.01;
 caja1.rotation.y +=0.0;
-llantaext1.rotation.z +=0.01;
+llantaext1.rotation.z +=0.0;
 camara.rotation.z +=0.0;
 
 renderer.render(escena,camara);
