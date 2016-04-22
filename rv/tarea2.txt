@@ -1,3 +1,5 @@
+crear robot con sombra en un plano
+
 1.-Sustituir el material de las paredes por phong o lambert
 2.-En la misma orientacion del sensor colocar una iluminacion cónica 
 3.- Cuando el sensor detecte una colision sustituir la pared detectada por una de material basico
