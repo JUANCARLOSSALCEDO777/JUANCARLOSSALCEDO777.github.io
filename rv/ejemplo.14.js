@@ -7,7 +7,7 @@ var ejes=new THREE.AxisHelper( 35 );
 var Modelo3D=new THREE.JSONLoader();
 Modelo3D.load('http://juancarlossalcedo777.github.io/rv/texturas/viga.js',funcionAgregarModelo);
 
-function funcionAgregarModelo(geometry,materials){
+function funcionAgregarModelo(geometry){
 	imagen=new THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/metal.jpg');
 	material=new THREE.MeshBasicMaterial({map:imagen})
 	ModeloFinal=new THREE.Mesh(geometry,material);
