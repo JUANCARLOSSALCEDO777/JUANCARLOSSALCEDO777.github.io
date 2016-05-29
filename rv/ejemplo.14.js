@@ -8,11 +8,12 @@ var Modelo3D=new THREE.JSONLoader();
 Modelo3D.load('http://juancarlossalcedo777.github.io/rv/texturas/viga.js',funcionAgregarModelo);
 
 function funcionAgregarModelo(geometry,materials){
-	imagen=new THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/viga.jpg');
+	imagen=new THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/metal.jpg');
 	material=new THREE.MeshBasicMaterial({map:imagen})
 	ModeloFinal=new THREE.Mesh(geometry,material);
 	escena.add(ModeloFinal);
 	ModeloFinal.position.set(0,0,0);
+	ModeloFinal.scale.set(10,10,10);
 	
 	
 }
