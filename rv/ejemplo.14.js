@@ -40,9 +40,6 @@ requestAnimationFrame( loop);
 	camara.position.x = 31 * Math.cos( THREE.Math.degToRad( theta ) );
 	camara.position.y = 31 * Math.sin( THREE.Math.degToRad( theta ) );
 	camara.lookAt( escena.position );
-caja1.rotation.x +=0.0;
-
-caja1.rotation.y +=0.0;
 
 
 
