@@ -9,7 +9,7 @@ Modelo3D.load('http://juancarlossalcedo777.github.io/rv/texturas/viga.js',funcio
 
 function funcionAgregarModelo(geometry){
 	imagen=new THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/metal.jpg');
-	material=new THREE.MeshBasicMaterial({map:imagen})
+	material=new THREE.MeshBasicMaterial({color: 0x00ff00})
 	ModeloFinal=new THREE.Mesh(geometry,material);
 	escena.add(ModeloFinal);
 	ModeloFinal.position.set(0,0,0);
