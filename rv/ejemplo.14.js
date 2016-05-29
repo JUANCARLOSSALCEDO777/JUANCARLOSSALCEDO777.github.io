@@ -17,9 +17,14 @@ function funcionAgregarModelo(geometry,materials){
 	
 	
 }
-
+var luzPuntual = new THREE.PointLight(0xFFFFFF);
+luzPuntual.position.x=50;
+luzPuntual.position.y=50;
+luzPuntual.position.z=50;
 
 escena.add(ejes);
+escena.add(luzPuntual);
+
 
 
 camara = new THREE.PerspectiveCamera();
