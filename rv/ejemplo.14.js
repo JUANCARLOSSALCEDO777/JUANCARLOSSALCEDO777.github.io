@@ -1,62 +1,25 @@
 function setup(){
 THREE.ImageUtils.crossOrigin ='';
+escena = new THREE.Scene();
 var theta = 0;
-var texturacaja =THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/metal.jpg');
-var materialcaja=new THREE.MeshBasicMaterial({map: texturacaja});
-var texturallanta=THREE.ImageUtils.loadTexture('http://raw.githubusercontent.com/JUANCARLOSSALCEDO777/JUANCARLOSSALCEDO777.github.io/master/rv/texturas/llanta%20oruga.png');
-var materialllanta=new THREE.MeshBasicMaterial({map: texturallanta}); 
 var ejes=new THREE.AxisHelper( 35 );
 
+var Modelo3D=new THREE.JSONLoader();
+Modelo3D.load('http://juancarlossalcedo777.github.io/rv/texturas/viga.js',funcionAgregarModelo);
 
-var forma1= new THREE.BoxGeometry(12,4,8); 
-var forma2= new THREE.BoxGeometry(2,6,2); 
-var llantaext  = new THREE.CylinderGeometry( 1, 1, 2, 32,1,false,0,(Math.PI) );
-
-
-llantaext1= new THREE.Mesh (llantaext,materialllanta);
-llantaext1.position.x=7;
-llantaext1.position.y=3;
-llantaext1.position.z=-3;
-llantaext1.rotation.z +=Math.PI/2;
-
-llantaext2= new THREE.Mesh (llantaext,materialllanta);
-llantaext2.position.x=-7;
-llantaext2.position.y=3;
-llantaext2.position.z=-3;
-llantaext2.rotation.z +=Math.PI/2;
-
-llantaext3= new THREE.Mesh (llantaext,materialllanta);
-llantaext3.position.x=-7;
-llantaext3.position.y=-3;
-llantaext3.position.z=-3;
-llantaext3.rotation.z +=Math.PI/2;
-llantaext3.rotation.x +=Math.PI;
-
-llantaext4= new THREE.Mesh (llantaext,materialllanta);
-llantaext4.position.x=7;
-llantaext4.position.y=-3;
-llantaext4.position.z=-3;
-llantaext4.rotation.z +=Math.PI/2;
-llantaext4.rotation.x +=Math.PI;
-caja1 = new THREE.Mesh (forma1,materialcaja);
-caja2 = new THREE.Mesh (forma2,materialllanta);
-caja3 = new THREE.Mesh (forma2,materialllanta);
-caja2.position.x=7;
-caja2.position.z=-3;
-caja3.position.x=-7;
-caja3.position.z=-3;
+function funcionAgregarModelo(geometry,materials){
+	imagen=new THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/viga.jpg');
+	material=new THREE.MeshBasicMaterial({map:imagen})
+	ModeloFinal=new THREE.Mesh(geometry,material);
+	escena.add(ModeloFinal);
+	ModeloFinal.position.set(0,0,0);
+	
+	
+}
 
 
-
-escena = new THREE.Scene();
-escena.add(caja1);
-escena.add(caja2);
-escena.add(caja3);
-escena.add(llantaext1);
-escena.add(llantaext2);
-escena.add(llantaext3);
-escena.add(llantaext4);
 escena.add(ejes);
+
 
 camara = new THREE.PerspectiveCamera();
 camara.position.z=31;
@@ -87,7 +50,7 @@ caja1.rotation.y +=0.0;
 renderer.render(escena,camara);
 }
 
-var camara,escena,renderer,malla;
+var camara,escena,renderer;
 
 setup();
 loop();
