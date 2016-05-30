@@ -45,6 +45,8 @@ renderer = new THREE.WebGLRenderer();
 
 renderer.setSize(window.innerHeight*.95,window.innerHeight*.95);
 document.body.appendChild( renderer.domElement);
+camara.position.x=Math.PI*0.5;
+
 }
 var theta = 0;
 function loop(){
@@ -54,6 +56,7 @@ requestAnimationFrame( loop);
 	//camara.position.x = 31 * Math.cos( THREE.Math.degToRad( theta ) );
 	//camara.position.y = 31 * Math.sin( THREE.Math.degToRad( theta ) );
 	camara.lookAt( escena.position );
+	//camara.position.x=Math.PI*0.5;
 
 
 
