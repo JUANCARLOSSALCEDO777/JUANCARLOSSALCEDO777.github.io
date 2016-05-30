@@ -41,7 +41,7 @@ camara.position.x=0;
 camara.position.y=5;
 camara.lookAt( escena.position );
 
-camara.position.y=Math.PI*0.5;
+camara.rotation.x=Math.PI*0.5;
 renderer = new THREE.WebGLRenderer();
 
 renderer.setSize(window.innerHeight*.95,window.innerHeight*.95);
@@ -57,7 +57,7 @@ requestAnimationFrame( loop);
 	//camara.position.x = 31 * Math.cos( THREE.Math.degToRad( theta ) );
 	//camara.position.y = 31 * Math.sin( THREE.Math.degToRad( theta ) );
 	camara.lookAt( escena.position );
-	//camara.position.x=Math.PI*0.5;
+	//camara.rotation.x=Math.PI*0.5;
 
 
 
