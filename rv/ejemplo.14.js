@@ -41,7 +41,7 @@ camara.position.x=0;
 camara.position.y=22;
 camara.lookAt( escena.position );
 
-camara.rotation.z=Math.PI*0.5;
+//camara.rotation.z=Math.PI*0.5;
 renderer = new THREE.WebGLRenderer();
 
 renderer.setSize(window.innerHeight*.95,window.innerHeight*.95);
