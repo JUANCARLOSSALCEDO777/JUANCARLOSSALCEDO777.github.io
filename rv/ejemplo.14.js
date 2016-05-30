@@ -37,7 +37,7 @@ escena.add(luzPuntual);
 
 camara = new THREE.PerspectiveCamera();
 camara.position.z=5;
-camara.position.x=5;
+camara.position.x=0;
 camara.position.y=5;
 camara.lookAt( escena.position );
 
@@ -51,8 +51,8 @@ function loop(){
 requestAnimationFrame( loop);
 
 	theta += 0.1;
-	camara.position.x = 31 * Math.cos( THREE.Math.degToRad( theta ) );
-	camara.position.y = 31 * Math.sin( THREE.Math.degToRad( theta ) );
+	//camara.position.x = 31 * Math.cos( THREE.Math.degToRad( theta ) );
+	//camara.position.y = 31 * Math.sin( THREE.Math.degToRad( theta ) );
 	camara.lookAt( escena.position );
 
 
