@@ -41,11 +41,12 @@ camara.position.x=0;
 camara.position.y=5;
 camara.lookAt( escena.position );
 
+camara.position.x=Math.PI*0.5;
 renderer = new THREE.WebGLRenderer();
 
 renderer.setSize(window.innerHeight*.95,window.innerHeight*.95);
 document.body.appendChild( renderer.domElement);
-camara.position.x=Math.PI*0.5;
+
 
 }
 var theta = 0;
