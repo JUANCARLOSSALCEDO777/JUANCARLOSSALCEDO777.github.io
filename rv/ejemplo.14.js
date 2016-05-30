@@ -38,7 +38,7 @@ escena.add(luzPuntual);
 camara = new THREE.PerspectiveCamera();
 camara.position.z=0;
 camara.position.x=0;
-camara.position.y=5;
+camara.position.y=22;
 camara.lookAt( escena.position );
 
 //camara.rotation.y=Math.PI*0.5;
