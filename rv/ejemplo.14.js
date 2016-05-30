@@ -13,7 +13,7 @@ function funcionAgregarModelo(geometry){
 	ModeloFinal=new THREE.Mesh(geometry,material);
 	escena.add(ModeloFinal);
 	ModeloFinal.position.set(0,0,0);
-	ModeloFinal.scale.set(10,10,10);
+	ModeloFinal.scale.set(100,100,100);
 	
 	
 }
