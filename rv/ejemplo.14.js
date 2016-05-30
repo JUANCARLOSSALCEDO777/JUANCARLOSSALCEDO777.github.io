@@ -56,7 +56,7 @@ requestAnimationFrame( loop);
 	theta += 0.1;
 	//camara.position.x = 31 * Math.cos( THREE.Math.degToRad( theta ) );
 	//camara.position.y = 31 * Math.sin( THREE.Math.degToRad( theta ) );
-	camara.lookAt( escena.position );
+	//camara.lookAt( escena.position );
 	//camara.rotation.x=Math.PI*0.5;
 
 
