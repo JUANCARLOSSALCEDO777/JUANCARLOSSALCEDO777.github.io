@@ -9,7 +9,7 @@ Modelo3D.load('http://juancarlossalcedo777.github.io/rv/texturas/viga.js',funcio
 
 function funcionAgregarModelo(geometry){
 	imagen=new THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/metal.jpg');
-	material=new THREE.MeshBasicMaterial({color: 0x00ff00})
+	material=new THREE.MeshBasicMaterial({color: D7D8D9})
 	ModeloFinal=new THREE.Mesh(geometry,material);
 	escena.add(ModeloFinal);
 	ModeloFinal.position.set(0,0,0);
@@ -17,10 +17,15 @@ function funcionAgregarModelo(geometry){
 	
 	
 }
+viga2=new THREE.Mesh(geometry,material);
+	escena.add(viga2);
+	viga2.position.set(0,5,0);
+	viga2.scale.set(100,100,100);
+
 var luzPuntual = new THREE.PointLight(0xFFFFFF);
-luzPuntual.position.x=50;
-luzPuntual.position.y=50;
-luzPuntual.position.z=50;
+luzPuntual.position.x=20;
+luzPuntual.position.y=20;
+luzPuntual.position.z=20;
 
 escena.add(ejes);
 escena.add(luzPuntual);
