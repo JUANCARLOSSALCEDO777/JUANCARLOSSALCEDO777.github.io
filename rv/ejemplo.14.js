@@ -1,45 +1,225 @@
+
 function setup(){
 THREE.ImageUtils.crossOrigin ='';
+
+
 escena = new THREE.Scene();
-var theta = 0;
+camara = new THREE.PerspectiveCamera();
+
 var ejes=new THREE.AxisHelper( 35 );
 
-var Modelo3D=new THREE.JSONLoader();
-Modelo3D.load('http://juancarlossalcedo777.github.io/rv/texturas/viga.js',funcionAgregarModelo);
+var Basedevigas=new THREE.JSONLoader();
+Basedevigas.load('http://juancarlossalcedo777.github.io/rv/texturas/viga.js',funcionAgregarModelo);
 
 function funcionAgregarModelo(geometry){
-	imagen=new THREE.ImageUtils.loadTexture('http://juancarlossalcedo777.github.io/rv/texturas/metal.jpg');
+	
 	material=new THREE.MeshStandardMaterial({color: 0xDBE6E6})
 	
-	ModeloFinal=new THREE.Mesh(geometry,material);
-	escena.add(ModeloFinal);
-	ModeloFinal.position.set(0,0,0);
-	ModeloFinal.scale.set(100,100,100)
+	viga1=new THREE.Mesh(geometry,material);
+	escena.add(viga1);
+	viga1.position.set(0,0,0);
+	viga1.scale.set(100,100,100)
 	
 	viga2=new THREE.Mesh(geometry,material);
 	escena.add(viga2);
-	viga2.position.set(0,5,0);
+	viga2.position.set(0,1,0);
 	viga2.scale.set(100,100,100);
+	
+	viga3=new THREE.Mesh(geometry,material);
+	escena.add(viga3);
+	viga3.position.set(0,2,0);
+	viga3.scale.set(100,100,100);
+	
+	viga4=new THREE.Mesh(geometry,material);
+	escena.add(viga4);
+	viga4.position.set(0,3,0);
+	viga4.scale.set(100,100,100);
+	
+	viga5=new THREE.Mesh(geometry,material);
+	escena.add(viga5);
+	viga5.position.set(0,4,0);
+	viga5.scale.set(100,100,100);
+	
+	viga6=new THREE.Mesh(geometry,material);
+	escena.add(viga6);
+	viga6.position.set(0,5,0);
+	viga6.scale.set(100,100,100);
+	
+	viga7=new THREE.Mesh(geometry,material);
+	escena.add(viga7);
+	viga7.position.set(0,-1,0);
+	viga7.scale.set(100,100,100);
+	
+	viga8=new THREE.Mesh(geometry,material);
+	escena.add(viga8);
+	viga8.position.set(0,-2,0);
+	viga8.scale.set(100,100,100);
+	
+	viga9=new THREE.Mesh(geometry,material);
+	escena.add(viga9);
+	viga9.position.set(0,-3,0);
+	viga9.scale.set(100,100,100);
+	
+	viga10=new THREE.Mesh(geometry,material);
+	escena.add(viga10);
+	viga10.position.set(0,-4,0);
+	viga10.scale.set(100,100,100);
+	
+	viga11=new THREE.Mesh(geometry,material);
+	escena.add(viga11);
+	viga11.position.set(0,-5,0);
+	viga11.scale.set(100,100,100);
 	
 	
 }
 
 
+var rieles=new THREE.JSONLoader();
+rieles.load('http://juancarlossalcedo777.github.io/rv/texturas/riel.js',funcionAgregarRieles);
+
+ function funcionAgregarRieles(geometry){
+	
+	material=new THREE.MeshStandardMaterial({color: 0x817F7F})
+	
+	riel1=new THREE.Mesh(geometry,material);
+	escena.add(riel1);
+	riel1.position.set(0,5.75,0);
+	riel1.rotation.x= Math.PI/2;
+	riel1.scale.set(100,100,100);
+	
+	riel2=new THREE.Mesh(geometry,material);
+	escena.add(riel2);
+	riel2.position.set(0,-5.75,0);
+	riel2.rotation.x= Math.PI/2;
+	riel2.scale.set(100,100,100);
+	
+
+}
+
+ var travesu=new THREE.JSONLoader();
+ travesu.load('http://juancarlossalcedo777.github.io/rv/texturas/travesup.js',funcionAgregarTravesup);
+
+function funcionAgregarTravesup(geometry){
+	
+	material=new THREE.MeshPhongMaterial({color: 0x0D3145})
+	
+	travesup=new THREE.Mesh(geometry,material);
+	escena.add(travesup);
+	travesup.position.set(0,0,3.5);
+	travesup.rotation.x= Math.PI/2;
+	travesup.rotation.z= Math.PI;
+	travesup.scale.set(100,100,100);
+}
+
+
+ Seta=new THREE.JSONLoader();
+ Seta.load('http://juancarlossalcedo777.github.io/rv/texturas/seta.js',funcionAgregarSeta);
+
+function funcionAgregarSeta(geometry){
+	
+	material=new THREE.MeshPhongMaterial({color: 0xF43317})
+	
+	ejez=new THREE.Mesh(geometry,material);
+    ejez.position.set(1,0,5.5);
+	ejez.rotation.x= Math.PI*3/2;
+	ejez.rotation.z= Math.PI;
+    ejez.scale.set(100,100,100);
+	 
+
+		escena.add(ejez);
+
+	
+ }
+
+	
+
+
+
+ var Go=new THREE.JSONLoader();
+ Go.load('http://juancarlossalcedo777.github.io/rv/texturas/eje.js',funcionAgregarEje);
+
+function funcionAgregarEje(geometry){
+	
+	material=new THREE.MeshPhongMaterial({color: 0x000000})
+	
+	eje=new THREE.Mesh(geometry,material);
+	eje.position.set(1.5,0,2.35);
+	eje.rotation.x= Math.PI*3/2;
+	eje.rotation.z= Math.PI;
+	eje.scale.set(100,100,100);
+	escena.add(eje);
+
+
+
+}
+
+	
+
+
+var skyGeo = new THREE.BoxGeometry(80, 85, 85);
+var texturew = THREE.ImageUtils.loadTexture( 'http://raw.githubusercontent.com/JUANCARLOSSALCEDO777/JUANCARLOSSALCEDO777.github.io/master/rv/texturas/wood.jpg' );
+ var materialw = new THREE.MeshBasicMaterial({ map: texturew,});
+
+var sky = new THREE.Mesh(skyGeo, materialw);
+     sky.material.side = THREE.BackSide;
+    escena.add(sky);
+
+
+
+
+
+	
+	
+	
+	
+
+
+var zonadetrabajoG= new THREE.BoxGeometry( 8, 9, .2);
+var zonadetrabajoM = new THREE.MeshDepthMaterial( {color: 0x00ff00} );
+var zonadetrabajo = new THREE.Mesh( zonadetrabajoG, zonadetrabajoM );
+escena.add(zonadetrabajo);
+zonadetrabajo.position.set(5,0,.6);
+
+
 var luzPuntual = new THREE.PointLight(0xFFFFFF);
-luzPuntual.position.x=20;
-luzPuntual.position.y=20;
-luzPuntual.position.z=20;
+luzPuntual.position.x=10;
+luzPuntual.position.y=10;
+luzPuntual.position.z=10;
 
-escena.add(ejes);
+
+var luzPuntual2 = new THREE.PointLight(0xFFFFFF);
+luzPuntual2.position.x=0;
+luzPuntual2.position.y=10;
+luzPuntual2.position.z=0;
+
+var luzPuntual3 = new THREE.PointLight(0xFFFFFF);
+luzPuntual3.position.x=10;
+luzPuntual3.position.y=0;
+luzPuntual3.position.z=0;
+
 escena.add(luzPuntual);
+escena.add(luzPuntual2);
+escena.add(luzPuntual3);
+escena.add(ejes);
 
 
 
-camara = new THREE.PerspectiveCamera();
-camara.position.z=15;
-camara.position.x=15;
-camara.position.y=15;
+  camara.position.x=20;
+camara.position.y=20;
+camara.position.z=20;
+
+
+
+
+
+
+
+
+
+
+
 camara.lookAt( escena.position );
+camara.rotation.z = Math.PI;
 
 //camara.rotation.z=Math.PI*0.5;
 renderer = new THREE.WebGLRenderer();
@@ -49,15 +229,18 @@ document.body.appendChild( renderer.domElement);
 
 
 }
-var theta = 0;
+
 function loop(){
 requestAnimationFrame( loop);
 
 	theta += 0.1;
-	camara.position.x = 31 * Math.cos( THREE.Math.degToRad( theta ) );
-	camara.position.y = 31 * Math.sin( THREE.Math.degToRad( theta ) );
-	camara.lookAt( escena.position );
-	//camara.rotation.x=Math.PI*0.5;
+
+	// camara.position.x = 10 * Math.cos( THREE.Math.degToRad( theta ) );
+	// camara.position.y = 10 * Math.sin( THREE.Math.degToRad( theta ) );
+	// camara.lookAt( escena.position );
+	//camara.rotation.z = Math.PI/(180*theta);
+	//camara.rotation.x =+ theta
+	
 
 
 
@@ -65,7 +248,11 @@ requestAnimationFrame( loop);
 renderer.render(escena,camara);
 }
 
+var desx=2;
+var desy=2;
+var desz=2;
 var camara,escena,renderer;
+var theta = 0;
 
 setup();
 loop();
