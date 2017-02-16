@@ -9,4 +9,4 @@ var contexto2 = miCanvas2.getContext("2d");
 contexto2.fillStyle="blue";
 contexto2.fillRect(30, 30, 50, 50);
 contexto2.fillStyle="yellow";
-contexto2.fillRect(50, 50, 70, 70);
+contexto2.fillRect(80, 80, 70, 70);
