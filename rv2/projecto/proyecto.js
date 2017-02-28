@@ -15,10 +15,10 @@ escena.add( luz );
 //--camara
 var camara = new THREE.PerspectiveCamera();
 
-camara.position.set(8,8,8);
+camara.position.set(15,15,15);
 
 //camara.position.z=-5; 
-//camara.position.z=-5; 
+
 
 console.log("estoy deseperado d D´:");
 var w =camara.rotation;
@@ -34,7 +34,7 @@ console.log(w);
 
 //personajes
 escena.add( mallaV1 );
-mallaV1.position.set(0,1,0);
+mallaV1.position.set(3,0,0);
 
 escena.add( mallaV2 );
 mallaV2.position.set(1,0,0);
