@@ -16,8 +16,10 @@ formaV.faces.push(new THREE.Face3( 1, 3, 4 ) ); // Cara 5
 formaV.computeBoundingSphere();
 formaV.computeFaceNormals();
 
-var materialV1 = new THREE.MeshNormalMaterial();
-var materialV2 = new THREE.MeshNormalMaterial();
+var materialV1 = new THREE.MeshLambertMaterial({color:0xFF0000});
+var materialV2 = new THREE.MeshLambertMaterial({color:0x0000FF});
+
+
 
 var mallaV1 = new THREE.Mesh( formaV, materialV1 );
 var mallaV2 = new THREE.Mesh( formaV, materialV2 );
