@@ -15,7 +15,7 @@ escena.add( luz );
 //--camara
 var camara = new THREE.PerspectiveCamera();
 
-camara.position.set(8,8,8);
+camara.position.set(30,30,30);
 
 //camara.position.z=-5; 
 //camara.position.z=-5; 
@@ -34,11 +34,38 @@ console.log(w);
 
 //personajes
 escena.add( mallaV1 );
-mallaV1.position.set(0,1,0);
+mallaV1.position.set(-2,0,0);
 
 escena.add( mallaV2 );
-mallaV2.position.set(1,0,0);
+mallaV2.position.set(2,0,0);
 
+escena.add( CaballoV1 );
+CaballoV1.position.set(-10,0,0);
+CaballoV1.rotateZ(Math.PI/2);
+CaballoV1.rotateX(Math.PI/2);
+
+escena.add( CaballoV2 );
+CaballoV2.position.set(10,0,0);
+CaballoV2.rotateZ(Math.PI);
+CaballoV2.rotateX(Math.PI/2);
+
+escena.add( EstrellaV1 );
+EstrellaV1.position.set(-20,0,0);
+EstrellaV1.rotateZ(Math.PI/2);
+EstrellaV1.rotateX(Math.PI/2);
+
+escena.add( EstrellaV2 );
+EstrellaV2.position.set(17,0,0);
+EstrellaV2.rotateZ(Math.PI);
+EstrellaV2.rotateX(Math.PI/2);
+
+escena.add( TorreV1 );
+TorreV1.position.set(-10,15,0);
+TorreV1.rotateX(Math.PI/2);
+
+escena.add( TorreV2 );
+TorreV2.position.set(10,15,0);
+TorreV2.rotateX(Math.PI/2);
 //personajes    
 
 var renderizador = new THREE.WebGLRenderer();
