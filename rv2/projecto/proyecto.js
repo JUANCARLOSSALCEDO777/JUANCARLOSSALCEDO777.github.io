@@ -15,7 +15,7 @@ escena.add( luz );
 //--camara
 var camara = new THREE.PerspectiveCamera();
 
-camara.position.set(15,15,15);
+camara.position.set(15,15,15);//REPONER C
 
 //camara.position.z=-5; 
 
@@ -24,20 +24,43 @@ console.log("estoy deseperado d D´:");
 var w =camara.rotation;
 
 camara.lookAt( escena.position );
-camara.rotation.z +=Math.PI/2;
+camara.rotation.z +=Math.PI/2; 
 camara.rotation.z +=Math.PI*1/6;
 console.log(w);
 
 
-//camara.rotation.x -=Math.PI/4;
+
 //--camara
 
 //personajes
 escena.add( mallaV1 );
-mallaV1.position.set(3,0,0);
+mallaV1.position.set(10,0,0);
 
 escena.add( mallaV2 );
-mallaV2.position.set(1,0,0);
+mallaV2.position.set(-10,0,0);
+
+
+escena.add( mallaRev1 );
+mallaRev1.position.set(5,0,0);
+mallaRev1.rotateX( Math.PI/2);
+
+escena.add( mallaRev2 );
+mallaRev2.position.set(-5,0,0);
+mallaRev2.rotateX( Math.PI/2);
+
+escena.add( malla2Rev1 );
+malla2Rev1.position.set(1,0,0);
+malla2Rev1.rotateX( Math.PI/2);
+
+escena.add( malla2Rev2 );
+malla2Rev2.position.set(-1,0,0);
+malla2Rev2.rotateX( Math.PI/2);
+
+
+
+//escena.add(helper); //visualizador de las nomales de el alfil creado en  FigRevolucion
+
+
 
 //personajes    
 
