@@ -36,29 +36,26 @@ console.log(w);
 
 //personajes
 escena.add( mallaV1 );
-
-
-
-mallaV1.position.set(10,0,0);
+mallaV1.position.set(3,10,0);
 
 escena.add( mallaV2 );
-mallaV2.position.set(-10,0,0);
+mallaV2.position.set(-3,10,0);
 
 
 escena.add( mallaRev1 );
-mallaRev1.position.set(5,0,0);
+mallaRev1.position.set(3,5,0);
 mallaRev1.rotateX( Math.PI/2);
 
 escena.add( mallaRev2 );
-mallaRev2.position.set(-5,0,0);
+mallaRev2.position.set(-3,5,0);
 mallaRev2.rotateX( Math.PI/2);
 
 escena.add( malla2Rev1 );
-malla2Rev1.position.set(1,0,0);
+malla2Rev1.position.set(3,0,0);
 malla2Rev1.rotateX( Math.PI/2);
 
 escena.add( malla2Rev2 );
-malla2Rev2.position.set(-1,0,0);
+malla2Rev2.position.set(-3,0,0);
 malla2Rev2.rotateX( Math.PI/2);
 
 
@@ -69,31 +66,31 @@ malla2Rev2.rotateX( Math.PI/2);
 
 
 escena.add( CaballoV1 );
-CaballoV1.position.set(-10,0,0);
+CaballoV1.position.set(-3,-5,0);
 CaballoV1.rotateZ(Math.PI/2);
 CaballoV1.rotateX(Math.PI/2);
 
 escena.add( CaballoV2 );
-CaballoV2.position.set(10,0,0);
-CaballoV2.rotateZ(Math.PI);
+CaballoV2.position.set(3,-5,0);
+CaballoV2.rotateZ(Math.PI/2);
 CaballoV2.rotateX(Math.PI/2);
 
 escena.add( EstrellaV1 );
-EstrellaV1.position.set(-20,0,0);
+EstrellaV1.position.set(-3,-10,0);
 EstrellaV1.rotateZ(Math.PI/2);
 EstrellaV1.rotateX(Math.PI/2);
 
 escena.add( EstrellaV2 );
-EstrellaV2.position.set(17,0,0);
-EstrellaV2.rotateZ(Math.PI);
+EstrellaV2.position.set(3,-10,0);
+EstrellaV2.rotateZ(Math.PI/2);
 EstrellaV2.rotateX(Math.PI/2);
 
 escena.add( TorreV1 );
-TorreV1.position.set(-10,15,0);
+TorreV1.position.set(-3,-15,0);
 TorreV1.rotateX(Math.PI/2);
 
 escena.add( TorreV2 );
-TorreV2.position.set(10,15,0);
+TorreV2.position.set(3,-15,0);
 TorreV2.rotateX(Math.PI/2);
 //personajes    
 
