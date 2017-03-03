@@ -21,6 +21,7 @@ var formaR = new THREE.LatheGeometry(puntosRev,32,(0),2*3.01416);
 formaR.computeBoundingSphere();
 formaR.computeFaceNormals();
 
+
 var materialR1 = new THREE.MeshLambertMaterial({color:0x0000FF});
 var materialR2 = new THREE.MeshLambertMaterial({color:0xFF0000});
 
