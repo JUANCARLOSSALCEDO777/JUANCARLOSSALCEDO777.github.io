@@ -27,7 +27,13 @@ escena.add(FigFinal1);
 FigFinal1.position.x=5;
 FigFinal1.position.y=5;
 
-//---personajes//    
+//---personajes//   
+escena.add(Trama);
+Trama.position.x=-5;
+Trama.position.y=5;
+//Trama.position.z=0.5;
+Trama.rotateX(Math.PI/2);
+Trama.rotateY(Math.PI/2);
 
 var renderizador = new THREE.WebGLRenderer();
 renderizador.setSize( window.innerHeight*.95, 
