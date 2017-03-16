@@ -1,12 +1,12 @@
-var CabezaF = new THREE.SphereGeometry(0.25, 30, 30);
-var CuerpoF = new THREE.CylinderGeometry(1.5, 0.2, 1.5, 30);
-var Pierna1F = new THREE.CylinderGeometry(0.3, 0.3, 1, 4);
-var Pierna2F = new THREE.CylinderGeometry(0.3, 0.3, 1, 4);
+var CabezaF = new THREE.SphereGeometry(0.5, 30, 30);
+var CuerpoF = new THREE.CylinderGeometry(0.2, 1.5, 1.5, 30);
+var Pierna1F = new THREE.CylinderGeometry(0.3, 0.3, 1, 10);
+var Pierna2F = new THREE.CylinderGeometry(0.3, 0.3, 1, 10);
 
-Pierna1F.translate(-0.25, 0, 0);
-Pierna1F.translate(0.25, 0, 0);
+Pierna1F.translate(0.5,0, 0);
+Pierna2F.translate(-0.5,0, 0);
 CuerpoF.translate(0, 1, 0);
-CabezaF.translate(0, 2.7, 0);
+CabezaF.translate(0, 2.2, 0);
 
 var CabezaM = new THREE.Mesh(CabezaF);
 var CuerpoM = new THREE.Mesh(CuerpoF);
