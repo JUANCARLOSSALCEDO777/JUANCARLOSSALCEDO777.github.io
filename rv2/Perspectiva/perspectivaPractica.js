@@ -15,7 +15,11 @@ escena.add( luz );
 
 
 //--camara//
-var camara = new THREE.PerspectiveCamera();
+var campoVision=60;//grados
+var relacionAspecto=window.innerWidth/window.innerHeight;
+var planoCercano=1;
+var planoLejano=1000;
+var camara = new THREE.PerspectiveCamera(campoVision,relacionAspecto,planoCercano,planoLejano);
 camara.position.set(25,25,25);
 camara.lookAt( escena.position );
 camara.rotation.z +=Math.PI/2; 
