@@ -29,7 +29,14 @@ escena.add(FigFinal1);
 FigFinal1.position.x=2.5;
 FigFinal1.position.y=2.5;
 
+escena.add(Trama);
+Trama.position.x=-5;
+Trama.position.y=5;
+//Trama.position.z=0.5;
+Trama.rotateX(Math.PI/2);
+Trama.rotateY(Math.PI/2);
 //---personajes//   
+
 
 //---tablero
 var Piezatablero;
@@ -59,6 +66,7 @@ for (var i=-37.5;i<65;i=i+5){
         console.log("pieza añadida");
        }
 }
+
 
 //---tablero
 var renderizador = new THREE.WebGLRenderer();
