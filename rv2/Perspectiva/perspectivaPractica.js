@@ -15,12 +15,19 @@ escena.add( luz );
 
 
 //--camara//
-var camara = new THREE.PerspectiveCamera();
-camara.position.set(25,25,25);
+var campoVision=60;//grados
+var relacionAspecto=window.innerWidth/window.innerHeight;
+var planoCercano=1;
+var planoLejano=1000;
+var camara = new THREE.PerspectiveCamera(campoVision,relacionAspecto,planoCercano,planoLejano);
+//camara.position.set(0,0,75); //Posicion 1
+camara.position.set(-15,25,15); //Posicion 2
+//camara.position.set(25,25,15);// Posicion 3
 camara.lookAt( escena.position );
-camara.rotation.z +=Math.PI/2; 
-camara.rotation.z +=Math.PI*1/6;
-
+//camara.rotation.z +=Math.PI/2; //Para posicion 1 y 3
+//camara.rotation.z +=Math.PI*1/8;//Para posicion 1 y 3
+camara.rotation.z +=2*Math.PI/7;//Para posicion 2
+camara.rotation.z +=Math.PI;//Para posicion 2
 
 //--camara//
 
@@ -70,8 +77,7 @@ for (var i=-37.5;i<65;i=i+5){
 
 //---tablero
 var renderizador = new THREE.WebGLRenderer();
-renderizador.setSize( window.innerHeight*.95, 
-                      window.innerHeight*.95 );
+renderizador.setSize( window.innerWidth, window.innerHeight );
                       
   
 
