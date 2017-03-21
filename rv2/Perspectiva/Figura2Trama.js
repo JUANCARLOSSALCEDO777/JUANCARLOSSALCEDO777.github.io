@@ -19,5 +19,10 @@ TramaF.merge(CuerpoM.geometry, CuerpoM.matrix);
 TramaF.merge(Pierna1M.geometry, Pierna1M.matrix);
 TramaF.merge(Pierna2M.geometry, Pierna2M.matrix);
 TramaF.translate(0, 0.75, 0);
+
+
 var TramaMat = new THREE.MeshLambertMaterial({color: 'blue'});
 var Trama = new THREE.Mesh(TramaF, TramaMat);
+
+Trama.scale.set(2,2,2); //se aumento el tamaño x2
+
