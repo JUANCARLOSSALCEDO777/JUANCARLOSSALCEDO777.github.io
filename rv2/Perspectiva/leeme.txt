@@ -1,1 +1,1 @@
-Por cada posicion (1,2,3) se tomo un screenshot tanto con la camara en persepectiva como en la ortografica en la misma posicion para poder observar mejor los cambias de camara y camara 
+Por cada posicion (1,2,3) se tomo un screenshot tanto con la camara en persepectiva como en la ortografica en la misma posicion para poder observar mejor los cambios entre camaras.
