@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+
+<title>Manejador de eventos</title>
+<meta http-equiv="Content-Type"
+content="text/html; charset=UTF-8">
+<style>
+
+</style>
+</head>
+<body>
+<script src="source/three.min.js"></script>
+<script>
+    
+  function listener(){
+    camara.aspect= window.innerWidth/window.innerHeight;
+    camara.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+}
+function push(e){
+    if (e.keyCode===113)
+        camara.position.z++;
+    else if(e.keyCode===81)
+        camara.position.z--;
+
+}
+
+function setup(){
+escena=new THREE.Scene();
+camara=new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
+camara.position.z=5;
+renderer=new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth,window.innerHeight);
+document.body.appendChild(renderer.domElement);
+malla = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshNormalMaterial());
+escena.add(malla);
+var tipoEvento = 'resize';
+var capturar=false;
+window.addEventListener('keypress',push,false);
+    
+window.addEventListener(tipoEvento, listener, capturar);
+    
+    
+
+}
+
+function loop(){
+
+requestAnimationFrame( loop);
+malla.rotation.x += 0.03;
+malla.rotation.y += 0.03;
+//malla.rotation.z += 0.01;
+
+renderer.render(escena, camara);
+}
+
+var camara, escena,renderer,malla;
+
+setup();
+loop();
+ 
+</script>
+</body>
+</html>
