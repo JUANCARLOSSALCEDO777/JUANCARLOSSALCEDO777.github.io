@@ -11,6 +11,7 @@ content="text/html; charset=UTF-8">
 </head>
 <body>
 <script src="source/three.min.js"></script>
+<script src="source/OrbitControls.js"></script>
 <script>
     
   function listener(){
@@ -49,7 +50,9 @@ escena.add( luz2 );
 var luz3 = new THREE.PointLight( 0xFFFFFF, 1, 100 );
 luz3.position.set( -15, -15, 15 );
 escena.add( luz3 );
-
+    
+var LuzAmbiental= new THREE.AmbientLight( 0xFFFFFF );
+escena.add(LuzAmbiental);
     
 //luz
 renderer=new THREE.WebGLRenderer();
@@ -65,26 +68,36 @@ var KayleLoader=new THREE.JSONLoader();
         
     }
 //carga de personajes
+
+//eventos
 var tipoEvento = 'resize';
 var capturar=false;
 window.addEventListener('keypress',push,false);
     
 window.addEventListener(tipoEvento, listener, capturar);
-    
+
     
 
+//eventos  
+//controls
+    controls = new THREE.OrbitControls( camara );
+//controls
 }
+    
+   
+
+
 
 function loop(){
 
 requestAnimationFrame( loop);
 
-//malla.rotation.z += 0.01;
+controls.update();
 
 renderer.render(escena, camara);
 }
 
-var camara, escena,renderer,malla;
+var camara, escena,renderer,malla, controls;
 
 setup();
 loop();
