@@ -12,7 +12,7 @@ puntosRev2.push(new THREE.Vector2(0,0));
 
 
                
-var formaR2 = new THREE.LatheGeometry(puntosRev2,32,(0),2*3.01416);
+var formaR2 = new THREE.LatheGeometry(puntosRev2,32,(0),2*3.1416);
 formaR2.computeBoundingSphere();
 formaR2.computeFaceNormals();
 
