@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+
+<title>19FEB2016</title>
+<meta http-equiv="Content-Type"
+content="text/html; charset=UTF-8">
+<style>
+body { margin: 0; }
+canvas { width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<script src="source/three.min.js"></script>
+<script>
+    function listener(){
+        camara.aspect=window.innerWidth / window.innerHeight;
+        camara.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeigh);
+        
+    }
+    
+  function setup(){
+   escena = new THREE.Scene();
+  var fov =75;//campo de vision control+shit + i habre el depurador
+  var aspect = window.innerWidth/window.innerHeight;
+  var near = 0.1;
+  var far =1000;
+   camara =new THREE.PerspectiveCamera(fov,aspect,near,far);
+  camara.position.z=4;
+   renderer =new THREE.WebGLRenderer();
+  renderer.setSize( window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+  var forma = new THREE.BoxGeometry(1,1,1);
+  var material = new THREE.MeshNormalMaterial();
+   cubo = new THREE.Mesh(forma,material);
+  
+  escena.add(cubo);
+      
+      var tipo_de_evento= 'resize';
+      var capturar = false;
+      window.addEventListener(tipo_de_evento,listener,capturar);
+    }
+    
+  function loop(){
+    requestAnimationFrame( loop)
+    
+    cubo.rotation.x+=0.1;
+    cubo.rotation.y+=0.1;
+    renderer.render( escena, camara);
+    
+  }
+  setup();
+  loop();
+    var cubo,renderer,escena,camara ;
+</script>
+</body>
+</html>

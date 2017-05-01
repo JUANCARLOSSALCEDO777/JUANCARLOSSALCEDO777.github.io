@@ -1,4 +1,5 @@
-var escena = new THREE.Scene();
+function setup(){
+ escena = new THREE.Scene();
     
 //---ejes//
     var ejes = new THREE.AxisHelper( 50 );
@@ -7,7 +8,7 @@ var escena = new THREE.Scene();
 //---ejes//
 
 //---luz//
-var luz = new THREE.PointLight( 0xFFFFFF, 1, 100 );
+ luz = new THREE.PointLight( 0xFFFFFF, 1, 100 );
 luz.position.set( 15, 15, 15 );
 escena.add( luz );
 //---luz//
@@ -20,11 +21,12 @@ escena.add(Plano);
 //---plano//
 
 //--camara//
-var camara = new THREE.PerspectiveCamera();
+ camara = new THREE.PerspectiveCamera();
 camara.position.set(20,20,20);
 camara.lookAt( escena.position );
 camara.rotation.z +=Math.PI/2; 
 camara.rotation.z +=Math.PI*1/6;
+camara.up.set( 0, 0, 1 );//colocando el top de la camara en el eje z+ cuestiones de orbit control
 //--camara//
 
 //---personajes//
@@ -81,8 +83,11 @@ TorreV2.rotateX(Math.PI/2);
 //escena.add(helper); //visualizador de las nomales de el alfil creado en  FigRevolucion
 
 //---personajes//    
+//--controles//
+controls = new THREE.OrbitControls( camara );
+//--controles//
 
-var renderizador = new THREE.WebGLRenderer();
+renderizador = new THREE.WebGLRenderer();
 renderizador.setSize( window.innerHeight*.95, 
                       window.innerHeight*.95 );
                       
@@ -92,4 +97,15 @@ renderizador.setSize( window.innerHeight*.95,
 document.body.appendChild( renderizador.domElement );
 renderizador.render( escena, camara );
 
+}
 
+function loop(){
+    requestAnimationFrame( loop);
+
+    controls.update();
+    renderizador.render(escena,camara);
+    
+}
+var escena,camara,renderizador;
+setup();
+loop();
