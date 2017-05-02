@@ -1,7 +1,7 @@
 var BaseF = new THREE.CylinderGeometry(2, 2, 1,16);
 var CuerpoF = new THREE.CylinderGeometry(1, 1, 2);
 var TapaF = new THREE.CylinderGeometry(1.75, 1.75, 1,6);
-CuerpoF.translate(0,1,0);
+CuerpoF.translate(0,1.5,0);
 TapaF.translate(0,3,0);
 
 var BaseM = new THREE.Mesh(BaseF);
