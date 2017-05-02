@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+
+<title>Prototipo de Kayle Blender-Three</title>
+<meta http-equiv="Content-Type"
+content="text/html; charset=UTF-8">
+<style>
+
+</style>
+</head>
+<body>
+<script src="source/three.min.js"></script>
+<script src="source/OrbitControls.js"></script>
+<script>
+    
+  function listener(){
+    camara.aspect= window.innerWidth/window.innerHeight;
+    camara.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+}
+function push(e){
+    if (e.keyCode===113)
+        camara.position.z++;
+    else if(e.keyCode===81)
+        camara.position.z--;
+
+}
+
+function setup(){
+escena=new THREE.Scene();
+escena.background=new THREE.Color(0xffffff);
+var ejes=new THREE.AxisHelper( 35 );
+    escena.add(ejes);
+//camara    
+camara=new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
+camara.position.z=5;
+camara.position.y=5;
+//camara
+    
+//luz
+var luz = new THREE.PointLight( 0xFFFFFF, 1, 100 );
+luz.position.set( 15, 15, 15 );
+escena.add( luz );
+
+var luz2 = new THREE.PointLight( 0xFFFFFF, 1, 100 );
+luz2.position.set( 25, 25, 25 );
+escena.add( luz2 );
+    
+var luz3 = new THREE.PointLight( 0xFFFFFF, 1, 100 );
+luz3.position.set( -15, -15, 15 );
+escena.add( luz3 );
+    
+var LuzAmbiental= new THREE.AmbientLight( 0xFFFFFF );
+escena.add(LuzAmbiental);
+    
+//luz
+renderer=new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth,window.innerHeight);
+document.body.appendChild(renderer.domElement);
+//carga de Personajes
+var KayleLoader=new THREE.JSONLoader();     
+    KayleLoader.load("source/KAYLE.js",funcionAgregarKayle);
+    
+    function funcionAgregarKayle(geometry,material){
+        Kayle1= new THREE.Mesh(geometry,material);
+        escena.add(Kayle1);
+        
+    }
+//carga de personajes
+
+//eventos
+var tipoEvento = 'resize';
+var capturar=false;
+window.addEventListener('keypress',push,false);
+    
+window.addEventListener(tipoEvento, listener, capturar);
+
+    
+
+//eventos  
+//controls
+    controls = new THREE.OrbitControls( camara );
+//controls
+}
+    
+   
+
+
+
+function loop(){
+
+requestAnimationFrame( loop);
+
+controls.update();
+
+renderer.render(escena, camara);
+}
+
+var camara, escena,renderer,malla, controls;
+
+setup();
+loop();
+ 
+</script>
+</body>
+</html>

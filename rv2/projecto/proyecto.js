@@ -1,4 +1,5 @@
-var escena = new THREE.Scene();
+function setup(){
+ escena = new THREE.Scene();
     
 //---ejes//
     var ejes = new THREE.AxisHelper( 50 );
@@ -7,24 +8,31 @@ var escena = new THREE.Scene();
 //---ejes//
 
 //---luz//
-var luz = new THREE.PointLight( 0xFFFFFF, 1, 100 );
-luz.position.set( 15, 15, 15 );
-escena.add( luz );
+ luz1 = new THREE.PointLight( 0x00FFFF, 1, 100 );
+luz1.position.set( 25, 25, 20 );
+escena.add( luz1 );
+luz2 = new THREE.PointLight( 0xFF0F00, 1, 100 );
+luz2.position.set( -25, 25, 20 );
+escena.add( luz2 );
+luz3 = new THREE.PointLight( 0xFFF000, 1, 100 );
+luz3.position.set( 0, -25, 20 );
+escena.add( luz3 );
 //---luz//
 
 //---plano//
-var PlanoGeo= new THREE.PlaneGeometry(30,30,2,6);
-var PlanoMat=new THREE.MeshLambertMaterial({color: 0x67EE0F,side: THREE.DoubleSide});
+var PlanoGeo= new THREE.PlaneGeometry(40,40,2,6);
+var PlanoMat=new THREE.MeshLambertMaterial({color: 0xFFFFFF,side: THREE.DoubleSide});
 var Plano = new THREE.Mesh(PlanoGeo,PlanoMat);
 escena.add(Plano);
 //---plano//
 
 //--camara//
-var camara = new THREE.PerspectiveCamera();
+ camara = new THREE.PerspectiveCamera();
 camara.position.set(20,20,20);
 camara.lookAt( escena.position );
 camara.rotation.z +=Math.PI/2; 
 camara.rotation.z +=Math.PI*1/6;
+camara.up.set( 0, 0, 1 );//colocando el top de la camara en el eje z+ cuestiones de orbit control
 //--camara//
 
 //---personajes//
@@ -81,15 +89,43 @@ TorreV2.rotateX(Math.PI/2);
 //escena.add(helper); //visualizador de las nomales de el alfil creado en  FigRevolucion
 
 //---personajes//    
+//--controles//
+controls = new THREE.OrbitControls( camara );
+//--controles//
 
-var renderizador = new THREE.WebGLRenderer();
+renderizador = new THREE.WebGLRenderer();
 renderizador.setSize( window.innerHeight*.95, 
                       window.innerHeight*.95 );
-                      
-  
-
+renderizador.shadowMapEnabled=true;   
+TorreV1.castShadow=true;
+//TorreV2.castShadow=true;
+//EstrellaV1.castShadow=true;
+EstrellaV2.castShadow=true;
+CaballoV1.castShadow=true;
+//CaballoV2.castShadow=true;
+malla2Rev1.castShadow=true;
+//malla2Rev2.castShadow=true;
+//mallaRev1.castShadow=true;
+mallaRev2.castShadow=true;
+mallaV1.castShadow=true;
+//mallaV2.castShadow=true;
+Plano.receiveShadow=true;
+luz1.castShadow=true;  
+luz2.castShadow=true;
+luz3.castShadow=true;
                       
 document.body.appendChild( renderizador.domElement );
 renderizador.render( escena, camara );
 
+}
 
+function loop(){
+    requestAnimationFrame( loop);
+
+    controls.update();
+    renderizador.render(escena,camara);
+    
+}
+var escena,camara,renderizador;
+setup();
+loop();
