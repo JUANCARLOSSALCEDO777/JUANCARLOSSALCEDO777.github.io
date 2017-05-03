@@ -91,6 +91,7 @@ TorreV2.rotateX(Math.PI/2);
 //---personajes//    
 //--controles//
 controls = new THREE.OrbitControls( camara );
+
 //--controles//
 
 renderizador = new THREE.WebGLRenderer();
