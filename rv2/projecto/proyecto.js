@@ -95,7 +95,8 @@ controls = new THREE.OrbitControls( camara );
 //--controles//
 
 renderizador = new THREE.WebGLRenderer();
-renderizador.setSize(window.innerWidth,window.innerHeight);
+renderizador.setSize( window.innerHeight*.95, 
+                      window.innerHeight*.95 );
 renderizador.shadowMapEnabled=true;   
 TorreV1.castShadow=true;
 //TorreV2.castShadow=true;
