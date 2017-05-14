@@ -59,14 +59,28 @@ renderer=new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth,window.innerHeight);
 document.body.appendChild(renderer.domElement);
 //carga de Personajes
-var KayleLoader=new THREE.JSONLoader();     
-    KayleLoader.load("source/KAYLE.js",funcionAgregarKayle);
-    
-    function funcionAgregarKayle(geometry,material){
-        Kayle1= new THREE.Mesh(geometry,material);
-        escena.add(Kayle1);
-        
+
+    CargarPer(0);
+    CargarPer(1);
+    CargarPer(2);
+    CargarPer(3);
+    CargarPer(4);
+    CargarPer(5);
+      
+   
+    function CargarPer(Num){
+    LinkModel="source/Personaje"+Num+".js"    
+    PersonajesLoader[Num]=new THREE.JSONLoader();
+    PersonajesLoader[Num].load(LinkModel,funcionAgregarPer);
+   
+    function funcionAgregarPer(geometry,material){
+        Personajes[Num]= new THREE.Mesh(geometry,material);
+        Personajes[Num].position.x=(Num*5);
+        escena.add( Personajes[Num]);
     }
+       
+    }
+    
 //carga de personajes
 
 //eventos
@@ -86,7 +100,12 @@ window.addEventListener(tipoEvento, listener, capturar);
     
    
 
+function ManipularObj(){
+     if (!Personajes[0]) {
+        return;
+    }
 
+}
 
 function loop(){
 
@@ -94,10 +113,13 @@ requestAnimationFrame( loop);
 
 controls.update();
 
+    
 renderer.render(escena, camara);
 }
 
-var camara, escena,renderer,malla, controls;
+var camara, escena,renderer,malla, controls,Num;
+    var Personajes=[];
+    var PersonajesLoader=[];
 
 setup();
 loop();
