@@ -26,23 +26,28 @@ escena.add( luz3 );
 //escena.add(Plano);
     
 var Piezatablero;
-var color = new Array();
-color[1]=new THREE.MeshLambertMaterial({color: 0x000000,side: THREE.DoubleSide});
-color[2]=new THREE.MeshLambertMaterial({color: 0xFFFFFF,side: THREE.DoubleSide});
-var colorTemp=color[1];
+var material = new Array();
+THREE.ImageUtils.crossOrigin='';
+var textura1=THREE.ImageUtils.loadTexture('source/mosaic02.jpg');
+var textura2=THREE.ImageUtils.loadTexture('source/mosaic03.jpg');
+ material[1]= new THREE.MeshLambertMaterial({map:textura1});
+ material[2]= new THREE.MeshLambertMaterial({map:textura2});
+//color[1]=new THREE.MeshLambertMaterial({color: 0x000000,side: THREE.DoubleSide});
+//color[2]=new THREE.MeshLambertMaterial({color: 0xFFFFFF,side: THREE.DoubleSide});
+var colorTemp=material[1];
 
-for (var i=-37.5;i<65;i=i+5){
+for (var i=2.5;i<105;i=i+5){
    //console.log("cambio de columna");
-    for(var j=-37.5;j<65;j=j+5){
+    for(var j=2.5;j<105;j=j+5){
        // console.log("cambio de fila")
     
-       if (colorTemp===color[2]){
-            colorTemp=color[1];
+       if (colorTemp===material[2]){
+            colorTemp=material[1];
             //console.log("se cambio a color 1");
        }
         
-        else if (colorTemp===color[1]){
-            colorTemp=color[2];
+        else if (colorTemp===material[1]){
+            colorTemp=material[2];
             //console.log("se cambio a color 2");
        }
         Piezatablero=new THREE.Mesh(new THREE.PlaneGeometry(5,5,1,1),colorTemp);
