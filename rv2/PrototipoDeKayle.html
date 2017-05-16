@@ -27,6 +27,13 @@ function push(e){
 
 }
 
+function ManipularObj(){
+     if (!Personajes[0]) {
+        return;
+    }
+
+}
+
 function setup(){
 escena=new THREE.Scene();
 escena.background=new THREE.Color(0xffffff);
@@ -39,25 +46,12 @@ camara.position.y=5;
 //camara
     
 //luz
-var luz = new THREE.PointLight( 0xFFFFFF, 1, 100 );
-luz.position.set( 15, 15, 15 );
-escena.add( luz );
 
-var luz2 = new THREE.PointLight( 0xFFFFFF, 1, 100 );
-luz2.position.set( 25, 25, 25 );
-escena.add( luz2 );
-    
-var luz3 = new THREE.PointLight( 0xFFFFFF, 1, 100 );
-luz3.position.set( -15, -15, 15 );
-escena.add( luz3 );
-    
 var LuzAmbiental= new THREE.AmbientLight( 0xFFFFFF );
 escena.add(LuzAmbiental);
     
 //luz
-renderer=new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth,window.innerHeight);
-document.body.appendChild(renderer.domElement);
+
 //carga de Personajes
 
     CargarPer(0);
@@ -83,6 +77,8 @@ document.body.appendChild(renderer.domElement);
     
 //carga de personajes
 
+    
+    
 //eventos
 var tipoEvento = 'resize';
 var capturar=false;
@@ -96,16 +92,14 @@ window.addEventListener(tipoEvento, listener, capturar);
 //controls
     controls = new THREE.OrbitControls( camara );
 //controls
+renderer=new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth,window.innerHeight);
+document.body.appendChild(renderer.domElement);
 }
     
    
 
-function ManipularObj(){
-     if (!Personajes[0]) {
-        return;
-    }
 
-}
 
 function loop(){
 
@@ -117,9 +111,9 @@ controls.update();
 renderer.render(escena, camara);
 }
 
-var camara, escena,renderer,malla, controls,Num;
-    var Personajes=[];
-    var PersonajesLoader=[];
+var camara, escena,renderer,controls,Num;
+var Personajes=[];
+var PersonajesLoader=[];
 
 setup();
 loop();
