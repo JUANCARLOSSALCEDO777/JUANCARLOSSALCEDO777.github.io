@@ -1,6 +1,26 @@
+  function listener(){
+    camara.aspect= window.innerWidth/window.innerHeight;
+    camara.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+}
+function push(e){
+    if (e.keyCode===113)
+        camara.position.z++;
+    else if(e.keyCode===81)
+        camara.position.z--;
+
+}
+function ManipularObj(){
+     if (!Personajes[0]) {
+        return;
+    }
+
+}
+
+
 function setup(){
  escena = new THREE.Scene();
-    
+ escena.background=new THREE.Color(0xffffff);
 //---ejes//
     var ejes = new THREE.AxisHelper( 50 );
     ejes.position.set( 0, 0, 0 );
@@ -17,19 +37,19 @@ escena.add( luz2 );
 luz3 = new THREE.PointLight( 0xFFF000, 1, 100 );
 luz3.position.set( 0, -25, 20 );
 escena.add( luz3 );
+    
+var LuzAmbiental= new THREE.AmbientLight( 0xFFFFFF );
+escena.add(LuzAmbiental);
 //---luz//
 
 //---plano//
-//var PlanoGeo= new THREE.PlaneGeometry(40,40,2,6);
-//var PlanoMat=new THREE.MeshLambertMaterial({color: 0xFFFFFF,side: THREE.DoubleSide});
-//var Plano = new THREE.Mesh(PlanoGeo,PlanoMat);
-//escena.add(Plano);
+
     
 var Piezatablero;
 var material = new Array();
 THREE.ImageUtils.crossOrigin='';
-var textura1=THREE.ImageUtils.loadTexture('source/mosaic02.jpg');
-var textura2=THREE.ImageUtils.loadTexture('source/mosaic03.jpg');
+var textura1=THREE.ImageUtils.loadTexture('source/mosaic02Fix.jpg');
+var textura2=THREE.ImageUtils.loadTexture('source/mosaic03Fix.jpg');
  material[1]= new THREE.MeshLambertMaterial({map:textura1});
  material[2]= new THREE.MeshLambertMaterial({map:textura2});
 //color[1]=new THREE.MeshLambertMaterial({color: 0x000000,side: THREE.DoubleSide});
@@ -52,7 +72,8 @@ for (var i=2.5;i<105;i=i+5){
        }
         Piezatablero=new THREE.Mesh(new THREE.PlaneGeometry(5,5,1,1),colorTemp);
         Piezatablero.position.x =i;
-        Piezatablero.position.y =j;
+        Piezatablero.position.z =j;
+         Piezatablero.rotateX(-(Math.PI)/2) ;
         escena.add(Piezatablero);
         Piezatablero.receiveShadow=true;
         //console.log("pieza añadida");
@@ -61,90 +82,54 @@ for (var i=2.5;i<105;i=i+5){
 //---plano//
 
 //--camara//
- camara = new THREE.PerspectiveCamera();
-camara.position.set(20,20,20);
-camara.lookAt( escena.position );
-camara.rotation.z +=Math.PI/2; 
-camara.rotation.z +=Math.PI*1/6;
-camara.up.set( 0, 0, 1 );//colocando el top de la camara en el eje z+ cuestiones de orbit control
+camara=new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
+camara.position.z=5;
+camara.position.y=5;
 //--camara//
 
 //---personajes//
-escena.add( mallaV1 );
-mallaV1.position.set(3,12.5,0);
 
-escena.add( mallaV2 );
-mallaV2.position.set(-3,12.5,0);
+    CargarPer(0);
+    CargarPer(1);
+    CargarPer(2);
+    CargarPer(3);
+    CargarPer(4);
+    CargarPer(5);
+      
+   
+    function CargarPer(Num){
+    LinkModel="source/Personaje"+Num+".js"    
+    PersonajesLoader[Num]=new THREE.JSONLoader();
+    PersonajesLoader[Num].load(LinkModel,funcionAgregarPer);
+   
+    function funcionAgregarPer(geometry,material){
+        Personajes[Num]= new THREE.Mesh(geometry,material);
+        Personajes[Num].position.x=(Num*5)+2.5;
+        escena.add( Personajes[Num]);
+    }
+       
+    }
 
+//---personajes// 
+    
+//eventos
+var tipoEvento = 'resize';
+var capturar=false;
+window.addEventListener('keypress',push,false);
+window.addEventListener(tipoEvento, listener, capturar);
 
-escena.add( mallaRev1 );
-mallaRev1.position.set(3,7.5,0);
-mallaRev1.rotateX( Math.PI/2);
-
-escena.add( mallaRev2 );
-mallaRev2.position.set(-3,7.5,0);
-mallaRev2.rotateX( Math.PI/2);
-
-escena.add( malla2Rev1 );
-malla2Rev1.position.set(3,2.5,0);
-malla2Rev1.rotateX( Math.PI/2);
-
-escena.add( malla2Rev2 );
-malla2Rev2.position.set(-3,2.5,0);
-malla2Rev2.rotateX( Math.PI/2);
-
-escena.add( CaballoV1 );
-CaballoV1.position.set(-3,-2.5,2);
-CaballoV1.rotateZ(Math.PI/2);
-CaballoV1.rotateX(Math.PI/2);
-
-escena.add( CaballoV2 );
-CaballoV2.position.set(3,-2.5,2);
-CaballoV2.rotateZ(Math.PI/2);
-CaballoV2.rotateX(Math.PI/2);
-
-escena.add( EstrellaV1 );
-EstrellaV1.position.set(-3,-7.5,2);
-EstrellaV1.rotateZ(Math.PI/2);
-EstrellaV1.rotateX(Math.PI/2);
-
-escena.add( EstrellaV2 );
-EstrellaV2.position.set(3,-7.5,2);
-EstrellaV2.rotateZ(Math.PI/2);
-EstrellaV2.rotateX(Math.PI/2);
-
-escena.add( TorreV1 );
-TorreV1.position.set(-3,-12.5,0.5);
-TorreV1.rotateX(Math.PI/2);
-
-escena.add( TorreV2 );
-TorreV2.position.set(3,-12.5,0.5);
-TorreV2.rotateX(Math.PI/2);
-//escena.add(helper); //visualizador de las nomales de el alfil creado en  FigRevolucion
-
-//---personajes//    
+//eventos  
+    
 //--controles//
 controls = new THREE.OrbitControls( camara );
 
 //--controles//
 
 renderizador = new THREE.WebGLRenderer();
-renderizador.setSize( window.innerHeight*.95, 
-                      window.innerHeight*.95 );
+renderizador.setSize( window.innerWidth, 
+                      window.innerHeight );
 renderizador.shadowMapEnabled=true;   
-TorreV1.castShadow=true;
-//TorreV2.castShadow=true;
-//EstrellaV1.castShadow=true;
-EstrellaV2.castShadow=true;
-CaballoV1.castShadow=true;
-//CaballoV2.castShadow=true;
-malla2Rev1.castShadow=true;
-//malla2Rev2.castShadow=true;
-//mallaRev1.castShadow=true;
-mallaRev2.castShadow=true;
-mallaV1.castShadow=true;
-//mallaV2.castShadow=true;
-//Piezatablero.receiveShadow=true;
+
 luz1.castShadow=true;  
 luz2.castShadow=true;
 luz3.castShadow=true;
@@ -161,6 +146,8 @@ function loop(){
     renderizador.render(escena,camara);
     
 }
-var escena,camara,renderizador;
+var escena,camara,renderizador,Num;
+var Personajes=[];
+var PersonajesLoader=[];
 setup();
 loop();
