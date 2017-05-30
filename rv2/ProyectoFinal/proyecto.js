@@ -56,9 +56,9 @@ var textura2=THREE.ImageUtils.loadTexture('source/mosaic03Fix.jpg');
 //color[2]=new THREE.MeshLambertMaterial({color: 0xFFFFFF,side: THREE.DoubleSide});
 var colorTemp=material[1];
 
-for (var i=2.5;i<105;i=i+5){
+for (var i=3.5;i<140;i=i+7){
    //console.log("cambio de columna");
-    for(var j=2.5;j<105;j=j+5){
+    for(var j=3.5;j<140;j=j+7){
        // console.log("cambio de fila")
     
        if (colorTemp===material[2]){
@@ -70,7 +70,7 @@ for (var i=2.5;i<105;i=i+5){
             colorTemp=material[2];
             //console.log("se cambio a color 2");
        }
-        Piezatablero=new THREE.Mesh(new THREE.PlaneGeometry(5,5,1,1),colorTemp);
+        Piezatablero=new THREE.Mesh(new THREE.PlaneGeometry(7,7,1,1),colorTemp);
         Piezatablero.position.x =i;
         Piezatablero.position.z =j;
          Piezatablero.rotateX(-(Math.PI)/2) ;
