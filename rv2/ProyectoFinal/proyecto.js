@@ -228,14 +228,15 @@ window.addEventListener(tipoEvento, listener, capturar);
 //eventos  
     
 //--controles//
-//controls = new THREE.OrbitControls( camara );//REMPLAZADO
-controls = new THREE.FirstPersonControls(camara);
+controls = new THREE.OrbitControls( camara );//REMPLAZADO
+controls.target=(new THREE.Vector3(70,0,70)) ;   
+//controls = new THREE.FirstPersonControls(camara);
 clock = new THREE.Clock();
-        controls.lookSpeed = 0.1;
-        controls.movementSpeed = 20;
-        controls.noFly = true;
-        controls.lookVertical = false;
-        controls.constrainVertical = true;
+       // controls.lookSpeed = 0.1;//REMPLAZADO
+        //controls.movementSpeed = 20;//REMPLAZADO
+        //controls.noFly = true;//REMPLAZADO
+        //controls.lookVertical = false;//REMPLAZADO
+        //controls.constrainVertical = true;//REMPLAZADO
     
     
 //--controles//
