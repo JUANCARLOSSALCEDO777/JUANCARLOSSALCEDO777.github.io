@@ -1,7 +1,7 @@
   function listener(){
     camara.aspect= window.innerWidth/window.innerHeight;
     camara.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth,window.innerHeight);
+    renderizador.setSize(window.innerWidth,window.innerHeight);
 }
 function push(e){
     if (e.keyCode===113)
@@ -83,19 +83,26 @@ for (var i=2.5;i<105;i=i+5){
 
 //--camara//
 camara=new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
-camara.position.z=5;
+camara.position.z=30;
+camara.position.x=30;
 camara.position.y=5;
+
+
 //--camara//
+//--FPS--//
+
+    
+//--FPS--//
 
 //---personajes//
- ObjetoPadre=function(geometry,material){
+ ObjetoPadre=function(geometry,material){      //inicio de objetoPadre
      THREE.Mesh.call(this,geometry,material) ; // el objeto donde se hereda (THREE.Mesh)se ocupa su constructor por esta razon el constructor de obejto padre                                               llama al constructor de THREE.Mesh con el uso de calll
      this.NoPI=3.141592654; // IMPORTANTE !!! No cambiar se ha probado con otros valores y la suma y resta hacen cosas raras por esto no se uso Math.PI
      this.VecFrente= new THREE.Vector3(0,0,1);
      this.OriginRaycaster=new THREE.Vector3(this.position.x,this.position.y+2.5,this.position.z);
      this.raycaster= new THREE.Raycaster(this.OriginRaycaster,this.VecFrente);
-     
-     
+     this.StepPerFrame=(1);
+     this.NewPos=new THREE.Vector3(0,0,0);
      
      
      
@@ -114,35 +121,46 @@ camara.position.y=5;
          this.rotation.y -= this.NoPI/2
      console.log(this.rotation.y)
      }
+    this.Avanzar=function(){
+        this.ActFrente();
+        //como estos vectores son definidos por three la suma y multiplicacion por un escalar estan definidos por three
+        this.NewPos=this.position.clone().add(this.VecFrente.clone().multiplyScalar (this.StepPerFrame) );
+        this.position.set(this.NewPos.x,this.NewPos.y,this.NewPos.z); 
+        console.log(this.position);
+    }
+     
      
      this.ActFrente=function (){
          if (this.rotation.y==0){
-             this.VecFrente= new THREE.Vector3(0,0,1);console.log(1)}
+             this.VecFrente= new THREE.Vector3(0,0,1);console.log("up")}
          else if (this.rotation.y==this.NoPI/2){
-             this.VecFrente= new THREE.Vector3(1,0,0); console.log(2)}
+             this.VecFrente= new THREE.Vector3(1,0,0); console.log("left")}
          else if (this.rotation.y==this.NoPI){
-             this.VecFrente= new THREE.Vector3(0,0,-1);console.log(3)}
+             this.VecFrente= new THREE.Vector3(0,0,-1);console.log("down")}
          else if (this.rotation.y==this.NoPI*3/2){
-             this.VecFrente= new THREE.Vector3(-1,0,0);console.log(4)}
+             this.VecFrente= new THREE.Vector3(-1,0,0);console.log("right")}
          
          console.log(this.VecFrente)
         }
          this.DetectarEnfrente=function(){
          this.ActFrente();
-         this.OriginRaycaster=new THREE.Vector3(this.position.x,this.position.y+2.5,this.position.z);//ACTUALIZAcion manual del vector 
+         this.OriginRaycaster=new THREE.Vector3(this.position.x,this.position.y+2.5,this.position.z);//ACTUALIZAcion manual del vector Origin
+             if (typeof Arrow != "undefined"){escena.remove(Arrow)}
             Arrow=new THREE.ArrowHelper(this.VecFrente,this.OriginRaycaster,60,0x000000);
             escena.add(Arrow);
              this.raycaster.set(this.OriginRaycaster,this.VecFrente);
             var interseciones=this.raycaster.intersectObjects(Personajes);
-              if(interseciones.length>0) {console.log("se ha encontrado "+interseciones.length+" objetos");
-            return interseciones[interseciones.length-1].object;
+              if(interseciones.length>1) {console.log("se ha encontrado "+interseciones.length+" objetos");
+            return interseciones[1].object
                                          }
              else console.log("no hay nada");
             
          }
 
-     }
-    //agregar anexos    
+         //agregar anexos    
+    
+         
+     }//fin de funcion ObjetoPadre
     
     
     ObjetoPadre.prototype=new THREE.Mesh();// SE define el prototipo ObjetoPadre, heredando asi las propiedades y metodos de THREE.Mesh
@@ -181,8 +199,16 @@ window.addEventListener(tipoEvento, listener, capturar);
 //eventos  
     
 //--controles//
-controls = new THREE.OrbitControls( camara );
-
+//controls = new THREE.OrbitControls( camara );//REMPLAZADO
+controls = new THREE.FirstPersonControls(camara);
+clock = new THREE.Clock();
+        controls.lookSpeed = 0.1;
+        controls.movementSpeed = 20;
+        controls.noFly = true;
+        controls.lookVertical = false;
+        controls.constrainVertical = true;
+    
+    
 //--controles//
 
 renderizador = new THREE.WebGLRenderer();
@@ -201,12 +227,19 @@ renderizador.render( escena, camara );
 
 function loop(){
     requestAnimationFrame( loop);
+    var delta = clock.getDelta();
+    controls.update(delta);
+ 
 
-    controls.update();
+   
+   
+
+  
+
     renderizador.render(escena,camara);
     
 }
-var escena,camara,renderizador,Num;
+var escena,camara,renderizador,Num,clock;
 var Personajes=[];
 var PersonajesLoader=[];
 setup();
