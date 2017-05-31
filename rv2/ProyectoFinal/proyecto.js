@@ -61,6 +61,15 @@ var colorTemp=material[1];
 
 for (var i=3.5;i<140;i=i+7){
    //console.log("cambio de columna");
+    if (colorTemp===material[2]){
+            colorTemp=material[1];
+            //console.log("se cambio a color 1");
+       }
+        
+        else if (colorTemp===material[1]){
+            colorTemp=material[2];
+            //console.log("se cambio a color 2");
+       }
     for(var j=3.5;j<140;j=j+7){
        // console.log("cambio de fila")
     
@@ -89,20 +98,32 @@ var pV;
 var pared=THREE.ImageUtils.loadTexture('source/wallstone.jpg');
 for (var i=0;i<21;i++){
     for (var j=0;j<20;j++){
-        if(Hor[i][j]==1){
+        if(Hor[i][j]==1&&Hor[i][j+1]==1){
+            pH=new THREE.Mesh(new THREE.BoxGeometry(7,4,1), new THREE.MeshLambertMaterial({map:pared} ));
+            pH.position.x =3.5+(j)*7;
+            pH.position.z =0.5+(i)*7;
+            pH.position.y =2;
+            escena.add(pH) ;        
+        }else if(Hor[i][j]==1&&Hor[i][j+1]==0){
             pH=new THREE.Mesh(new THREE.BoxGeometry(8,4,1), new THREE.MeshLambertMaterial({map:pared} ));
             pH.position.x =4+(j)*7;
             pH.position.z =0.5+(i)*7;
             pH.position.y =2;
-            escena.add(pH) ;        
+            escena.add(pH) ;                
+        }else if(Hor[i][j]==1){
+            pH=new THREE.Mesh(new THREE.BoxGeometry(7,4,1), new THREE.MeshLambertMaterial({map:pared} ));
+            pH.position.x =3.5+(j)*7;
+            pH.position.z =0.5+(i)*7;
+            pH.position.y =2;
+            escena.add(pH) ;                
         }
     }    
 }
 for (var i=1;i<21;i++){
     for (var j=0;j<21;j++){
         if(Ver[i][j]==1){
-            pV=new THREE.Mesh(new THREE.BoxGeometry(1,4,8), new THREE.MeshLambertMaterial({map:pared} ));
-            pV.position.z =4+(i-1)*7;
+            pV=new THREE.Mesh(new THREE.BoxGeometry(1,4,7), new THREE.MeshLambertMaterial({map:pared} ));
+            pV.position.z =3.5+(i-1)*7;
             pV.position.x =0.5+(j)*7;
             pV.position.y =2;
             escena.add(pV) ;        
