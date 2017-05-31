@@ -28,15 +28,18 @@ function setup(){
 //---ejes//
 
 //---luz//
- luz1 = new THREE.PointLight( 0x00FFFF, 1, 100 );
-luz1.position.set( 25, 25, 20 );
+ luz1 = new THREE.PointLight( 0xFFFFFF, 1,140 );
+luz1.position.set( 0, 50, 0 );
 escena.add( luz1 );
-luz2 = new THREE.PointLight( 0xFF0F00, 1, 100 );
-luz2.position.set( -25, 25, 20 );
+luz2 = new THREE.PointLight( 0xFFFFFF, 1, 140 );
+luz2.position.set( 140, 50, 0 );
 escena.add( luz2 );
-luz3 = new THREE.PointLight( 0xFFF000, 1, 100 );
-luz3.position.set( 0, -25, 20 );
+luz3 = new THREE.PointLight( 0xFFFFFF, 1, 140 );
+luz3.position.set( 0, 50, 140 );
 escena.add( luz3 );
+luz4 = new THREE.PointLight( 0xFFFFFF, 1, 140 );
+luz4.position.set( 140, 50, 140 );
+escena.add( luz4 );
     
 var LuzAmbiental= new THREE.AmbientLight( 0xFFFFFF );
 escena.add(LuzAmbiental);
@@ -50,8 +53,8 @@ var material = new Array();
 THREE.ImageUtils.crossOrigin='';
 var textura1=THREE.ImageUtils.loadTexture('source/mosaic02Fix.jpg');
 var textura2=THREE.ImageUtils.loadTexture('source/mosaic03Fix.jpg');
- material[1]= new THREE.MeshLambertMaterial({map:textura1});
- material[2]= new THREE.MeshLambertMaterial({map:textura2});
+ material[1]= new THREE.MeshLambertMaterial({map:textura1,side: THREE.DoubleSide});
+ material[2]= new THREE.MeshLambertMaterial({map:textura2,side: THREE.DoubleSide});
 //color[1]=new THREE.MeshLambertMaterial({color: 0x000000,side: THREE.DoubleSide});
 //color[2]=new THREE.MeshLambertMaterial({color: 0xFFFFFF,side: THREE.DoubleSide});
 var colorTemp=material[1];
@@ -80,6 +83,32 @@ for (var i=3.5;i<140;i=i+7){
        }
 }
 //---plano//
+//Laberinto
+var pH;
+var pV;
+var pared=THREE.ImageUtils.loadTexture('source/wallstone.jpg');
+for (var i=0;i<21;i++){
+    for (var j=0;j<20;j++){
+        if(Hor[i][j]==1){
+            pH=new THREE.Mesh(new THREE.BoxGeometry(8,4,1), new THREE.MeshLambertMaterial({map:pared} ));
+            pH.position.x =4+(j)*7;
+            pH.position.z =0.5+(i)*7;
+            pH.position.y =2;
+            escena.add(pH) ;        
+        }
+    }    
+}
+for (var i=1;i<21;i++){
+    for (var j=0;j<21;j++){
+        if(Ver[i][j]==1){
+            pV=new THREE.Mesh(new THREE.BoxGeometry(1,4,8), new THREE.MeshLambertMaterial({map:pared} ));
+            pV.position.z =4+(i-1)*7;
+            pV.position.x =0.5+(j)*7;
+            pV.position.y =2;
+            escena.add(pV) ;        
+        }
+    }    
+}
 
 //--camara//
 camara=new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
