@@ -130,7 +130,7 @@ for (var i=1;i<21;i++){
         }
     }    
 }
-
+//laberinto
 //--camara//
 camara=new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
 camara.position.z=30;
@@ -215,22 +215,22 @@ camara.position.y=5;
     
     ObjetoPadre.prototype=new THREE.Mesh();// SE define el prototipo ObjetoPadre, heredando asi las propiedades y metodos de THREE.Mesh
  
-    CargarPer(0);
-    CargarPer(1);
-    CargarPer(2);
-    CargarPer(3);
-    CargarPer(4);       
-    CargarPer(5);
+    CargarPer(0,3.5,0,3.5);
+    CargarPer(1,10.5,0,3.5);
+    CargarPer(2,17.5,0,3.5);
+    CargarPer(3,24.5,0,3.5);
+    CargarPer(4,32,0,3.5);       
+    CargarPer(5,39,0,3.5);
       
    
-    function CargarPer(Num){
+    function CargarPer(Num,X=0,Y=0,Z=0){
     LinkModel="source/Personaje"+Num+".js"    
     PersonajesLoader[Num]=new THREE.JSONLoader();
     PersonajesLoader[Num].load(LinkModel,funcionAgregarPer);
    
     function funcionAgregarPer(geometry,material){
         Personajes[Num]= new ObjetoPadre(geometry,material);//new THREE.Mesh(geometry,material);
-        Personajes[Num].position.x=(Num*5)+2.5;
+        Personajes[Num].position.set(X,Y,Z)
         escena.add( Personajes[Num]);
     }
  
