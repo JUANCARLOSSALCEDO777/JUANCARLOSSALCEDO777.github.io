@@ -359,8 +359,8 @@ renderizador.render( escena, camara );
 function loop(){
     requestAnimationFrame( loop);
     controls.update();
- //Personajes[6].Sensar();
- //Personajes[6].Actuar();
+ Personajes[6].Sensar();
+ Personajes[6].Actuar();
 
    
    
