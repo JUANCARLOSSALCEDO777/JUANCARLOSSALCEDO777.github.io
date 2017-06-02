@@ -332,7 +332,7 @@ window.addEventListener(tipoEvento, listener, capturar);
 controls = new THREE.OrbitControls( camara );//REMPLAZADO
 controls.target=(new THREE.Vector3(70,0,70)) ;   
 //controls = new THREE.FirstPersonControls(camara);
-clock = new THREE.Clock();
+//clock = new THREE.Clock();
        // controls.lookSpeed = 0.1;//REMPLAZADO
         //controls.movementSpeed = 20;//REMPLAZADO
         //controls.noFly = true;//REMPLAZADO
@@ -359,8 +359,8 @@ renderizador.render( escena, camara );
 function loop(){
     requestAnimationFrame( loop);
     controls.update();
- Personajes[6].Sensar();
- Personajes[6].Actuar();
+ //Personajes[6].Sensar();
+ //Personajes[6].Actuar();
 
    
    
