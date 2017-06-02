@@ -93,40 +93,46 @@ for (var i=3.5;i<140;i=i+7){
 }
 //---plano//
 //Laberinto
-var pH;
-var pV;
+    var pH=new Array;
+    var pV=new Array;
+var a=0;
+var b=0;
 var pared=THREE.ImageUtils.loadTexture('source/wallstone.jpg');
 for (var i=0;i<21;i++){
     for (var j=0;j<20;j++){
         if(Hor[i][j]==1&&Hor[i][j+1]==1){
-            pH=new THREE.Mesh(new THREE.BoxGeometry(7,4,1), new THREE.MeshLambertMaterial({map:pared} ));
-            pH.position.x =3.5+(j)*7;
-            pH.position.z =0.5+(i)*7;
-            pH.position.y =2;
-            escena.add(pH) ;        
+            pH[a]=new THREE.Mesh(new THREE.BoxGeometry(7,4,1), new THREE.MeshLambertMaterial({map:pared} ));
+            pH[a].position.x =3.5+(j)*7;
+            pH[a].position.z =0.5+(i)*7;
+            pH[a].position.y =2;
+            escena.add(pH[a]) ;
+            a++;
         }else if(Hor[i][j]==1&&Hor[i][j+1]==0){
-            pH=new THREE.Mesh(new THREE.BoxGeometry(8,4,1), new THREE.MeshLambertMaterial({map:pared} ));
-            pH.position.x =4+(j)*7;
-            pH.position.z =0.5+(i)*7;
-            pH.position.y =2;
-            escena.add(pH) ;                
+            pH[a]=new THREE.Mesh(new THREE.BoxGeometry(8,4,1), new THREE.MeshLambertMaterial({map:pared} ));
+            pH[a].position.x =4+(j)*7;
+            pH[a].position.z =0.5+(i)*7;
+            pH[a].position.y =2;
+            escena.add(pH[a]) ;
+             a++;
         }else if(Hor[i][j]==1){
-            pH=new THREE.Mesh(new THREE.BoxGeometry(7,4,1), new THREE.MeshLambertMaterial({map:pared} ));
-            pH.position.x =3.5+(j)*7;
-            pH.position.z =0.5+(i)*7;
-            pH.position.y =2;
-            escena.add(pH) ;                
+            pH[a]=new THREE.Mesh(new THREE.BoxGeometry(7,4,1), new THREE.MeshLambertMaterial({map:pared} ));
+           pH[a].position.x =3.5+(j)*7;
+           pH[a].position.z =0.5+(i)*7;
+           pH[a].position.y =2;
+            escena.add(pH[a]) ;
+            a++;
         }
     }    
 }
 for (var i=1;i<21;i++){
     for (var j=0;j<21;j++){
         if(Ver[i][j]==1){
-            pV=new THREE.Mesh(new THREE.BoxGeometry(1,4,7), new THREE.MeshLambertMaterial({map:pared} ));
-            pV.position.z =3.5+(i-1)*7;
-            pV.position.x =0.5+(j)*7;
-            pV.position.y =2;
-            escena.add(pV) ;        
+            pV[b]=new THREE.Mesh(new THREE.BoxGeometry(1,4,7), new THREE.MeshLambertMaterial({map:pared} ));
+            pV[b].position.z =3.5+(i-1)*7;
+            pV[b].position.x =0.5+(j)*7;
+           pV[b].position.y =2;
+            escena.add(pV[b]) ;
+            b++;
         }
     }    
 }
