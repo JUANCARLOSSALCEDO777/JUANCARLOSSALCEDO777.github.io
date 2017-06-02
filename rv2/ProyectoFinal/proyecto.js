@@ -143,8 +143,8 @@ for (var i=1;i<21;i++){
 //laberinto
 //--camara//
 camara=new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
-camara.position.z=30;
-camara.position.x=30;
+camara.position.z=140;
+camara.position.x=140;
 camara.position.y=5;
 
 
@@ -359,8 +359,23 @@ renderizador.render( escena, camara );
 function loop(){
     requestAnimationFrame( loop);
     controls.update();
- Personajes[6].Sensar();
- Personajes[6].Actuar();
+
+    
+  for(var i=0;i<escena.children.length; i++){
+    if(escena.children[i].Sensar !== undefined)
+      escena.children[i].Sensar();
+  }
+
+
+
+
+
+  for(var i=0;i<escena.children.length; i++){
+    if(escena.children[i].Actuar !== undefined)
+      escena.children[i].Actuar();
+  }
+
+
 
    
    
