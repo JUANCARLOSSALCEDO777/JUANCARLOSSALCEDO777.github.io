@@ -151,17 +151,32 @@ camara.position.y=5;
 //--FPS--//
 
 //---personajes//
- ObjetoPadre=function(geometry,material){      //inicio de objetoPadre
+ ObjetoPadre=function(geometry,material,Bando="blue"){      //inicio de objetoPadre
+   
      THREE.Mesh.call(this,geometry,material) ; // el objeto donde se hereda (THREE.Mesh)se ocupa su constructor por esta razon el constructor de obejto padre                                               llama al constructor de THREE.Mesh con el uso de calll
      this.NoPI=3.141592654; // IMPORTANTE !!! No cambiar se ha probado con otros valores y la suma y resta hacen cosas raras por esto no se uso Math.PI
      this.VecFrente= new THREE.Vector3(0,0,1);
      this.OriginRaycaster=new THREE.Vector3(this.position.x,this.position.y+2.5,this.position.z);
-     this.raycaster= new THREE.Raycaster(this.OriginRaycaster,this.VecFrente);
-     this.StepPerFrame=(1);
+     this.raycaster= new THREE.Raycaster(this.OriginRaycaster,this.VecFrente,1.5,7);
+     this.StepPerFrame=(7);
      this.NewPos=new THREE.Vector3(0,0,0);
      
-     
-     
+     //Propiedades refrentes al bando
+     this.bando=Bando;//red o blue, por default blue
+     var Azul=new THREE.MeshBasicMaterial({color:0x0000ff});
+     var Rojo=new THREE.MeshBasicMaterial({color:0xff0000});
+     var MatBando;
+     if (this.bando=="blue"){
+         MatBando=Azul;
+     }
+     if (this.bando=="red"){
+         MatBando=Rojo;
+     }
+     this.bando_mesh=new THREE.Mesh(new THREE.CircleGeometry(1.5,15),MatBando);
+     this.bando_mesh.position.set(0,0.01,0);
+     this.bando_mesh.rotation.x-=Math.PI/2;
+     this.add(this.bando_mesh);
+     //Propiedades refrentes al bando
      this.GirarIzq= function(){
          this.rotation.y += this.NoPI/2
      if (this.rotation.y==this.NoPI*2){
@@ -205,9 +220,10 @@ camara.position.y=5;
             Arrow=new THREE.ArrowHelper(this.VecFrente,this.OriginRaycaster,60,0x000000);
             escena.add(Arrow);
              this.raycaster.set(this.OriginRaycaster,this.VecFrente);
-            var interseciones=this.raycaster.intersectObjects(Personajes);
-              if(interseciones.length>1) {console.log("se ha encontrado "+interseciones.length+" objetos");
-            return interseciones[1].object
+            var interseciones=this.raycaster.intersectObjects(escena.children);
+              if(interseciones.length>=1) {console.log("se ha encontrado "+interseciones.length+" objetos");
+//detecta al mismo objeto dos veces una por cada lado de la cara por eso la longitud del array cambia de 0 a dos 
+            return interseciones[0].object
                                          }
              else console.log("no hay nada");
             
@@ -221,23 +237,33 @@ camara.position.y=5;
     
     ObjetoPadre.prototype=new THREE.Mesh();// SE define el prototipo ObjetoPadre, heredando asi las propiedades y metodos de THREE.Mesh
  
-    CargarPer(0,3.5,0,3.5);
-    CargarPer(1,10.5,0,3.5);
-    CargarPer(2,17.5,0,3.5);
-    CargarPer(3,24.5,0,3.5);
-    CargarPer(4,32,0,3.5);       
-    CargarPer(5,39,0,3.5);
-      
+    CargarPer(Num=0,NumArray=0,X=3.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
+    CargarPer(Num=1,NumArray=1,X=10.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
+    CargarPer(Num=2,NumArray=2,X=17.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
+    CargarPer(Num=3,NumArray=3,X=24.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
+    CargarPer(Num=4,NumArray=4,X=31.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");       
+    CargarPer(Num=5,NumArray=5,X=38.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
+    
+    CargarPer(Num=0,NumArray=6,X=136.5,Y=0,Z=136.5,rX=0,rY=3.141592654,rZ=0,Bando="red");
+    CargarPer(Num=1,NumArray=7,X=129.5,Y=0,Z=136.5,rX=0,rY=3.141592654,rZ=0,Bando="red");
+    CargarPer(Num=2,NumArray=8,X=122.5,Y=0,Z=136.5,rX=0,rY=3.141592654,rZ=0,Bando="red");
+    CargarPer(Num=3,NumArray=9,X=115.5,Y=0,Z=136.5,rX=0,rY=3.141592654,rZ=0,Bando="red");
+    CargarPer(Num=4,NumArray=10,X=108.5,Y=0,Z=136.5,rX=0,rY=3.141592654,rZ=0,Bando="red");       
+    CargarPer(Num=5,NumArray=11,X=101.5,Y=0,Z=136.5,rX=0,rY=3.141592654,rZ=0,Bando="red");
+
    
-    function CargarPer(Num,X=0,Y=0,Z=0){
+    function CargarPer(Num,NumArray,X=0,Y=0,Z=0,rX=0,rY=0,rZ=0,Bando="blue"){
     LinkModel="source/Personaje"+Num+".js"    
     PersonajesLoader[Num]=new THREE.JSONLoader();
     PersonajesLoader[Num].load(LinkModel,funcionAgregarPer);
    
     function funcionAgregarPer(geometry,material){
-        Personajes[Num]= new ObjetoPadre(geometry,material);//new THREE.Mesh(geometry,material);
-        Personajes[Num].position.set(X,Y,Z)
-        escena.add( Personajes[Num]);
+        Personajes[NumArray]= new ObjetoPadre(geometry,material,Bando);//new THREE.Mesh(geometry,material);
+        Personajes[NumArray].position.set(X,Y,Z);
+        Personajes[NumArray].rotation.set(rX,rY,rZ);
+    
+        
+        escena.add( Personajes[NumArray]);
     }
  
     }
