@@ -105,6 +105,7 @@ for (var i=0;i<21;i++){
             pH[a].position.x =3.5+(j)*7;
             pH[a].position.z =0.5+(i)*7;
             pH[a].position.y =2;
+            pH[a].name="Pared";
             escena.add(pH[a]) ;
             a++;
         }else if(Hor[i][j]==1&&Hor[i][j+1]==0){
@@ -112,6 +113,7 @@ for (var i=0;i<21;i++){
             pH[a].position.x =4+(j)*7;
             pH[a].position.z =0.5+(i)*7;
             pH[a].position.y =2;
+            pH[a].name="Pared";
             escena.add(pH[a]) ;
              a++;
         }else if(Hor[i][j]==1){
@@ -119,6 +121,7 @@ for (var i=0;i<21;i++){
            pH[a].position.x =3.5+(j)*7;
            pH[a].position.z =0.5+(i)*7;
            pH[a].position.y =2;
+           pH[a].name="Pared";
             escena.add(pH[a]) ;
             a++;
         }
@@ -131,6 +134,7 @@ for (var i=1;i<21;i++){
             pV[b].position.z =3.5+(i-1)*7;
             pV[b].position.x =0.5+(j)*7;
            pV[b].position.y =2;
+           pV[b].name="Pared";
             escena.add(pV[b]) ;
             b++;
         }
@@ -151,15 +155,18 @@ camara.position.y=5;
 //--FPS--//
 
 //---personajes//
- ObjetoPadre=function(geometry,material,Bando="blue"){      //inicio de objetoPadre
+ ObjetoPadre=function(geometry,material,Bando="blue",Tipo=null){      //inicio de objetoPadre
    
      THREE.Mesh.call(this,geometry,material) ; // el objeto donde se hereda (THREE.Mesh)se ocupa su constructor por esta razon el constructor de obejto padre                                               llama al constructor de THREE.Mesh con el uso de calll
      this.NoPI=3.141592654; // IMPORTANTE !!! No cambiar se ha probado con otros valores y la suma y resta hacen cosas raras por esto no se uso Math.PI
+     this.name="Personaje"
+     this.TipoPer=Tipo;
      this.VecFrente= new THREE.Vector3(0,0,1);
      this.OriginRaycaster=new THREE.Vector3(this.position.x,this.position.y+2.5,this.position.z);
      this.raycaster= new THREE.Raycaster(this.OriginRaycaster,this.VecFrente,1.5,7);
      this.StepPerFrame=(7);
      this.NewPos=new THREE.Vector3(0,0,0);
+     this.ObjDetectado=null;
      
      //Propiedades refrentes al bando
      this.bando=Bando;//red o blue, por default blue
@@ -183,6 +190,7 @@ camara.position.y=5;
         this.rotation.y=0; 
         }
           console.log(this.rotation.y)
+          
      }
      
         this.GirarDer= function(){
@@ -191,6 +199,7 @@ camara.position.y=5;
         }
          this.rotation.y -= this.NoPI/2
      console.log(this.rotation.y)
+     
      }
     this.Avanzar=function(){
         this.ActFrente();
@@ -226,12 +235,51 @@ camara.position.y=5;
             return interseciones[0].object
                                          }
              else console.log("no hay nada");
-            
+            return null
          }
-
-         //agregar anexos    
+this.random1_2=function(){
+                var x =Math.random() * (2.5 - 1.5) + 1.5;
+                return Math.floor(x);
     
+}
+         //agregar anexos    
+    this.Sensar= function(){
+        this.ObjDetectado=this.DetectarEnfrente();
+    }
+    
+    this.Actuar=function(){
+         if (this.ObjDetectado==null){
+             this.Avanzar();
+         }
+        else if(this.ObjDetectado.name=="Pared"){
+           var select=this.random1_2();
+               if(select==1){
+                  this.GirarDer(); 
+               }
+                if(select==2){
+                    this.GirarIzq();
+                }
+        }
+        else if(this.ObjDetectado.name=="Personaje"){
+            
+            if(this.ObjDetectado.TipoPer==this.TipoPer){
+                console.log("matando al obj detetado");
+                escena.remove(this.ObjDetectado);
+            }
+            else{
+              var select=this.random1_2();
+               if(select==1){
+                  this.GirarDer(); 
+               }
+                if(select==2){
+                    this.GirarIzq();
+                }
+                
+               
+            }
+        }
          
+     }
      }//fin de funcion ObjetoPadre
     
     
@@ -258,7 +306,7 @@ camara.position.y=5;
     PersonajesLoader[Num].load(LinkModel,funcionAgregarPer);
    
     function funcionAgregarPer(geometry,material){
-        Personajes[NumArray]= new ObjetoPadre(geometry,material,Bando);//new THREE.Mesh(geometry,material);
+        Personajes[NumArray]= new ObjetoPadre(geometry,material,Bando,Num);//new THREE.Mesh(geometry,material);
         Personajes[NumArray].position.set(X,Y,Z);
         Personajes[NumArray].rotation.set(rX,rY,rZ);
     
@@ -310,9 +358,9 @@ renderizador.render( escena, camara );
 
 function loop(){
     requestAnimationFrame( loop);
-    var delta = clock.getDelta();
-    controls.update(delta);
- 
+    controls.update();
+ Personajes[6].Sensar();
+ Personajes[6].Actuar();
 
    
    
