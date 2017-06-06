@@ -4,11 +4,15 @@
     renderizador.setSize(window.innerWidth,window.innerHeight);
 }
 function push(e){
-    if (e.keyCode===113)
-        camara.position.z++;
-    else if(e.keyCode===81)
-        camara.position.z--;
-
+    /*     if(e.keyCode===65|| e.keyCode===97)//IZQUIERDA     A
+        Personajes[0].position.x++;
+    else if (e.keyCode===87 || e.keyCode===119)//ADELANTE   W
+        Personajes[0].position.z++;
+    else if (e.keyCode===68 || e.keyCode===100)//DERECHA    D
+        Personajes[0].position.x--;
+    else if (e.keyCode===83|| e.keyCode===115)//ATRAS       S
+        Personajes[0].position.z--;
+*/
 }
 function ManipularObj(){
      if (!Personajes[0]) {
@@ -107,6 +111,9 @@ for (var i=0;i<21;i++){
             pH[a].position.y =2;
             pH[a].name="Pared";
             escena.add(pH[a]) ;
+            var box = new THREE.BoxHelper( pH[a], 0x0000ff );
+            box.position.set(-pH[a].position.x,-pH[a].position.y, -pH[a].position.z);
+            pH[a].add( box );
             a++;
         }else if(Hor[i][j]==1&&Hor[i][j+1]==0){
             pH[a]=new THREE.Mesh(new THREE.BoxGeometry(8,4,1), new THREE.MeshLambertMaterial({map:pared} ));
@@ -115,6 +122,9 @@ for (var i=0;i<21;i++){
             pH[a].position.y =2;
             pH[a].name="Pared";
             escena.add(pH[a]) ;
+            var box = new THREE.BoxHelper( pH[a], 0x0000ff );
+            box.position.set(-pH[a].position.x,-pH[a].position.y, -pH[a].position.z);
+            pH[a].add( box );
              a++;
         }else if(Hor[i][j]==1){
             pH[a]=new THREE.Mesh(new THREE.BoxGeometry(7,4,1), new THREE.MeshLambertMaterial({map:pared} ));
@@ -123,6 +133,9 @@ for (var i=0;i<21;i++){
            pH[a].position.y =2;
            pH[a].name="Pared";
             escena.add(pH[a]) ;
+             var box = new THREE.BoxHelper( pH[a], 0x0000ff );
+            box.position.set(-pH[a].position.x,-pH[a].position.y, -pH[a].position.z);
+            pH[a].add( box );
             a++;
         }
     }    
@@ -136,6 +149,9 @@ for (var i=1;i<21;i++){
            pV[b].position.y =2;
            pV[b].name="Pared";
             escena.add(pV[b]) ;
+            var box = new THREE.BoxHelper( pV[b], 0xffff00 );
+            box.position.set(-pV[b].position.x,-pV[b].position.y, -pV[b].position.z);
+            pV[b].add( box );
             b++;
         }
     }    
@@ -164,7 +180,7 @@ camara.position.y=5;
      this.VecFrente= new THREE.Vector3(0,0,1);
      this.OriginRaycaster=new THREE.Vector3(this.position.x,this.position.y+2.5,this.position.z);
      this.raycaster= new THREE.Raycaster(this.OriginRaycaster,this.VecFrente,1.5,7);
-     this.StepPerFrame=(7);
+     this.StepPerFrame=(7/4);
      this.NewPos=new THREE.Vector3(0,0,0);
      this.ObjDetectado=null;
      
@@ -244,7 +260,10 @@ this.random1_2=function(){
 }
          //agregar anexos    
     this.Sensar= function(){
+        if(Number.isInteger((this.position.x+3.5)/7) && Number.isInteger((this.position.z+3.5)/7)){ 
+            //solo que sense en los puntos de giro, para asi avanzar en fracciones de 7 sin tener problemas con los giros
         this.ObjDetectado=this.DetectarEnfrente();
+        }
     }
     
     this.Actuar=function(){
@@ -307,12 +326,33 @@ this.random1_2=function(){
    
     function funcionAgregarPer(geometry,material){
         Personajes[NumArray]= new ObjetoPadre(geometry,material,Bando,Num);//new THREE.Mesh(geometry,material);
+    var box = new THREE.BoxHelper( Personajes[NumArray], 0xffff00 );
+     //box.position.set(-Personajes[NumArray].position.x,0, -Personajes[NumArray].position.z);
+        Personajes[NumArray].add( box );
+        
         Personajes[NumArray].position.set(X,Y,Z);
         Personajes[NumArray].rotation.set(rX,rY,rZ);
-    
-        
+      
         escena.add( Personajes[NumArray]);
-    }
+        //anadiendo caracteristicas del jugador 
+        if(NumArray==0){
+     camara.position.set(0,8,-7);
+     camara.rotation.set(0,Math.PI,0);
+     Personajes[NumArray].add(camara);
+     Personajes[NumArray].Actuar= undefined ;       
+     Personajes[NumArray].Sensar= undefined ; 
+         
+        controlsPer = new THREE.FirstPersonControls(Personajes[NumArray]);// solo camara usuario
+        controlsPer.lookSpeed = 0.5;
+        controlsPer.movementSpeed = 20;
+        controlsPer.noFly = false;
+        controlsPer.lookVertical = false;
+        controlsPer.constrainVertical = true;
+        controlsPer.activeLook = true;
+    
+      }
+     
+     }
  
     }
   
@@ -329,10 +369,10 @@ window.addEventListener(tipoEvento, listener, capturar);
 //eventos  
     
 //--controles//
-controls = new THREE.OrbitControls( camara );//REMPLAZADO
-controls.target=(new THREE.Vector3(70,0,70)) ;   
-//controls = new THREE.FirstPersonControls(camara);
-//clock = new THREE.Clock();
+//controls = new THREE.OrbitControls( camara );    //regresar
+//controls.target=(new THREE.Vector3(70,0,70)) ;   // regresar
+//controls = new THREE.FirstPersonControls(camara);// solo camara usuario
+clock = new THREE.Clock();
        // controls.lookSpeed = 0.1;//REMPLAZADO
         //controls.movementSpeed = 20;//REMPLAZADO
         //controls.noFly = true;//REMPLAZADO
@@ -358,7 +398,10 @@ renderizador.render( escena, camara );
 
 function loop(){
     requestAnimationFrame( loop);
-    controls.update();
+    //controls.update();
+     var delta = clock.getDelta();
+    controlsPer.update(delta);// para usuario
+
 
     
   for(var i=0;i<escena.children.length; i++){
@@ -385,8 +428,10 @@ function loop(){
     renderizador.render(escena,camara);
     
 }
-var escena,camara,renderizador,Num,clock;
+var escena,camara,renderizador,Num,clock,controlsPer,controls;
 var Personajes=[];
 var PersonajesLoader=[];
 setup();
+
+    
 loop();
