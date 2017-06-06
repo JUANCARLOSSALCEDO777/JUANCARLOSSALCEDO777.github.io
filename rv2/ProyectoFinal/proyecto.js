@@ -111,9 +111,10 @@ for (var i=0;i<21;i++){
             pH[a].position.y =2;
             pH[a].name="Pared";
             escena.add(pH[a]) ;
-            var box = new THREE.BoxHelper( pH[a], 0x0000ff );
-            box.position.set(-pH[a].position.x,-pH[a].position.y, -pH[a].position.z);
-            pH[a].add( box );
+            pH[a].geometry.computeBoundingBox ();
+            pH[a].box = new THREE.BoxHelper( pH[a], 0x0000ff );
+            pH[a].box.position.set(-pH[a].position.x,-pH[a].position.y, -pH[a].position.z);
+            pH[a].add( pH[a].box );
             a++;
         }else if(Hor[i][j]==1&&Hor[i][j+1]==0){
             pH[a]=new THREE.Mesh(new THREE.BoxGeometry(8,4,1), new THREE.MeshLambertMaterial({map:pared} ));
@@ -122,9 +123,10 @@ for (var i=0;i<21;i++){
             pH[a].position.y =2;
             pH[a].name="Pared";
             escena.add(pH[a]) ;
-            var box = new THREE.BoxHelper( pH[a], 0x0000ff );
-            box.position.set(-pH[a].position.x,-pH[a].position.y, -pH[a].position.z);
-            pH[a].add( box );
+            pH[a].geometry.computeBoundingBox ();
+            pH[a].box = new THREE.BoxHelper( pH[a], 0x0000ff );
+            pH[a].box.position.set(-pH[a].position.x,-pH[a].position.y, -pH[a].position.z);
+            pH[a].add( pH[a].box );
              a++;
         }else if(Hor[i][j]==1){
             pH[a]=new THREE.Mesh(new THREE.BoxGeometry(7,4,1), new THREE.MeshLambertMaterial({map:pared} ));
@@ -133,9 +135,10 @@ for (var i=0;i<21;i++){
            pH[a].position.y =2;
            pH[a].name="Pared";
             escena.add(pH[a]) ;
-             var box = new THREE.BoxHelper( pH[a], 0x0000ff );
-            box.position.set(-pH[a].position.x,-pH[a].position.y, -pH[a].position.z);
-            pH[a].add( box );
+            pH[a].geometry.computeBoundingBox ();
+            pH[a].box = new THREE.BoxHelper( pH[a], 0x0000ff );
+            pH[a].box.position.set(-pH[a].position.x,-pH[a].position.y, -pH[a].position.z);
+            pH[a].add( pH[a].box );
             a++;
         }
     }    
@@ -149,9 +152,10 @@ for (var i=1;i<21;i++){
            pV[b].position.y =2;
            pV[b].name="Pared";
             escena.add(pV[b]) ;
-            var box = new THREE.BoxHelper( pV[b], 0xffff00 );
-            box.position.set(-pV[b].position.x,-pV[b].position.y, -pV[b].position.z);
-            pV[b].add( box );
+            pV[b].geometry.computeBoundingBox ();
+            pV[b].box = new THREE.BoxHelper( pV[b], 0xffff00 );
+            pV[b].box.position.set(-pV[b].position.x,-pV[b].position.y, -pV[b].position.z);
+            pV[b].add( pV[b].box );
             b++;
         }
     }    
@@ -304,7 +308,7 @@ this.random1_2=function(){
     
     ObjetoPadre.prototype=new THREE.Mesh();// SE define el prototipo ObjetoPadre, heredando asi las propiedades y metodos de THREE.Mesh
  
-    CargarPer(Num=0,NumArray=0,X=3.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
+    CargarPer(Num=0,NumArray=0,X=-33.5,Y=0,Z=-33.5,rX=0,rY=0,rZ=0,Bando="blue"); //modificada la pos para que no inicie intersectando
     CargarPer(Num=1,NumArray=1,X=10.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
     CargarPer(Num=2,NumArray=2,X=17.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
     CargarPer(Num=3,NumArray=3,X=24.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
@@ -326,17 +330,20 @@ this.random1_2=function(){
    
     function funcionAgregarPer(geometry,material){
         Personajes[NumArray]= new ObjetoPadre(geometry,material,Bando,Num);//new THREE.Mesh(geometry,material);
-    var box = new THREE.BoxHelper( Personajes[NumArray], 0xffff00 );
+         Personajes[NumArray].geometry.computeBoundingBox ();
+        Personajes[NumArray].box = new THREE.BoxHelper( Personajes[NumArray], 0xffff00 );
      //box.position.set(-Personajes[NumArray].position.x,0, -Personajes[NumArray].position.z);
-        Personajes[NumArray].add( box );
+        Personajes[NumArray].add( Personajes[NumArray].box );
         
         Personajes[NumArray].position.set(X,Y,Z);
         Personajes[NumArray].rotation.set(rX,rY,rZ);
       
         escena.add( Personajes[NumArray]);
         //anadiendo caracteristicas del jugador 
+        
         if(NumArray==0){
      camara.position.set(0,8,-7);
+    // camara.rotation.set(0,Math.PI,0);
      camara.rotation.set(0,Math.PI,0);
      Personajes[NumArray].add(camara);
      Personajes[NumArray].Actuar= undefined ;       
@@ -410,6 +417,20 @@ function loop(){
   }
 
 
+    for(var i=0;i<escena.children.length; i++){
+    if(escena.children[i].box  !== undefined && Go)
+     var temp=Personajes[0].geometry.boundingBox.intersectsBox (escena.children[i].geometry.boundingBox );
+    if (temp){ alert("interseccion");       }    
+        
+  }
+
+    
+    
+    
+    
+    
+    
+    
 
 
 
@@ -429,6 +450,7 @@ function loop(){
     
 }
 var escena,camara,renderizador,Num,clock,controlsPer,controls;
+var Go=false;
 var Personajes=[];
 var PersonajesLoader=[];
 setup();
