@@ -1,18 +1,34 @@
-  function listener(){
+/*eventos,colisiones y agentes*/
+function listener(){
     camara.aspect= window.innerWidth/window.innerHeight;
     camara.updateProjectionMatrix();
     renderizador.setSize(window.innerWidth,window.innerHeight);
 }
 function push(e){
-    /*     if(e.keyCode===65|| e.keyCode===97)//IZQUIERDA     A
-        Personajes[0].position.x++;
-    else if (e.keyCode===87 || e.keyCode===119)//ADELANTE   W
-        Personajes[0].position.z++;
-    else if (e.keyCode===68 || e.keyCode===100)//DERECHA    D
-        Personajes[0].position.x--;
-    else if (e.keyCode===83|| e.keyCode===115)//ATRAS       S
-        Personajes[0].position.z--;
-*/
+    Personajes[0].SensarUsuario();
+    Personajes[0].ActuarUsuario();
+    if(e.keyCode===65|| e.keyCode===97){//IZQUIERDA     A
+        if(Personajes[0].rotation.y != Personajes[0].NoPI/2){Personajes[0].rotation.y = Personajes[0].NoPI/2 }
+        else if(Personajes[0].AvanzarEnabled){
+        Personajes[0].Avanzar();}
+    }
+    else if (e.keyCode===87 || e.keyCode===119){//ADELANTE   W
+         if(Personajes[0].rotation.y != Personajes[0].NoPI*0/2) {Personajes[0].rotation.y = Personajes[0].NoPI*0/2 }
+        else if(Personajes[0].AvanzarEnabled){
+        Personajes[0].Avanzar();}
+    }
+    else if (e.keyCode===68 || e.keyCode===100){//DERECHA    D
+        if(Personajes[0].rotation.y != Personajes[0].NoPI*3/2) {Personajes[0].rotation.y = Personajes[0].NoPI*3/2 }
+        else if(Personajes[0].AvanzarEnabled){
+        Personajes[0].Avanzar();}
+    }
+    else if (e.keyCode===83|| e.keyCode===115){//ATRAS       S
+         if(Personajes[0].rotation.y != Personajes[0].NoPI*2/2) {Personajes[0].rotation.y = Personajes[0].NoPI*2/2 }
+        else if(Personajes[0].AvanzarEnabled){
+        Personajes[0].Avanzar();}
+    }
+    
+
 }
 function ManipularObj(){
      if (!Personajes[0]) {
@@ -32,7 +48,7 @@ function setup(){
 //---ejes//
 
 //---luz//
- luz1 = new THREE.PointLight( 0xFFFFFF, 1,140 );
+luz1 = new THREE.PointLight( 0xFFFFFF, 1,140 );
 luz1.position.set( 0, 50, 0 );
 escena.add( luz1 );
 luz2 = new THREE.PointLight( 0xFFFFFF, 1, 140 );
@@ -163,9 +179,12 @@ for (var i=1;i<21;i++){
 //laberinto
 //--camara//
 camara=new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
-camara.position.z=140;
-camara.position.x=140;
-camara.position.y=5;
+camara.position.z=-14;
+camara.position.x=3.5;
+camara.position.y=16;
+camara.offSet=   new THREE.Vector3(3.5,12,-16);
+//camara.position=camara.offSet;
+camara.rotation.set(0,Math.PI,0);
 
 
 //--camara//
@@ -187,7 +206,7 @@ camara.position.y=5;
      this.StepPerFrame=(7/4);
      this.NewPos=new THREE.Vector3(0,0,0);
      this.ObjDetectado=null;
-     
+     this.AvanzarEnabled=false;
      //Propiedades refrentes al bando
      this.bando=Bando;//red o blue, por default blue
      var Azul=new THREE.MeshBasicMaterial({color:0x0000ff});
@@ -288,6 +307,9 @@ this.random1_2=function(){
             if(this.ObjDetectado.TipoPer==this.TipoPer){
                 console.log("matando al obj detetado");
                 escena.remove(this.ObjDetectado);
+                if(this.ObjDetectado==Personajes[0]){
+                    alert("¡HAZ MUERTO! pulsa F5 para reniciar");
+                }
             }
             else{
               var select=this.random1_2();
@@ -303,12 +325,45 @@ this.random1_2=function(){
         }
          
      }
+    //metodos de usuario
+    this.SensarUsuario= function(){
+    //    if(Number.isInteger((this.position.x+3.5)/7) && Number.isInteger((this.position.z+3.5)/7)){ 
+            //solo que sense en los puntos de giro, para asi avanzar en fracciones de 7 sin tener problemas con los giros
+        this.ObjDetectado=this.DetectarEnfrente();
+        //} del IF recordar habilitar
+    }
+    
+    this.ActuarUsuario=function(){
+         if (this.ObjDetectado==null){
+             this.AvanzarEnabled=true;
+         }
+        else if(this.ObjDetectado.name=="Pared"){
+           this.AvanzarEnabled=false;
+        }
+        else if(this.ObjDetectado.name=="Personaje"){
+            
+            if(this.ObjDetectado.TipoPer==this.TipoPer){
+                console.log("matando al obj detectado");
+                escena.remove(this.ObjDetectado);
+                alert("Haz matado a un enemigo");
+            }
+            else{
+              this.AvanzarEnabled=false;
+                
+               
+            }
+        }
+        }
+         
+     
+    //metodos de usuario
+    
      }//fin de funcion ObjetoPadre
     
     
     ObjetoPadre.prototype=new THREE.Mesh();// SE define el prototipo ObjetoPadre, heredando asi las propiedades y metodos de THREE.Mesh
  
-    CargarPer(Num=0,NumArray=0,X=-33.5,Y=0,Z=-33.5,rX=0,rY=0,rZ=0,Bando="blue"); //modificada la pos para que no inicie intersectando
+    CargarPer(Num=0,NumArray=0,X=3.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue"); //modificada la pos para que no inicie intersectando
     CargarPer(Num=1,NumArray=1,X=10.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
     CargarPer(Num=2,NumArray=2,X=17.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
     CargarPer(Num=3,NumArray=3,X=24.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
@@ -342,20 +397,21 @@ this.random1_2=function(){
         //anadiendo caracteristicas del jugador 
         
         if(NumArray==0){
-     camara.position.set(0,8,-7);
-    // camara.rotation.set(0,Math.PI,0);
-     camara.rotation.set(0,Math.PI,0);
-     Personajes[NumArray].add(camara);
+     //camara.position.set(0,8,-7);
+     //camara.rotation.set(0,Math.PI,0);
+     //Personajes[NumArray].add(camara);
+     camara.lookAt(Personajes[NumArray].position);  
+     Personajes[NumArray].raycaster= new THREE.Raycaster(this.OriginRaycaster,this.VecFrente,1.5,3);
      Personajes[NumArray].Actuar= undefined ;       
      Personajes[NumArray].Sensar= undefined ; 
          
-        controlsPer = new THREE.FirstPersonControls(Personajes[NumArray]);// solo camara usuario
-        controlsPer.lookSpeed = 0.5;
-        controlsPer.movementSpeed = 20;
-        controlsPer.noFly = false;
-        controlsPer.lookVertical = false;
-        controlsPer.constrainVertical = true;
-        controlsPer.activeLook = true;
+        //controlsPer = new THREE.FirstPersonControls(Personajes[NumArray]);// solo camara usuario
+        //controlsPer.lookSpeed = 0.5;
+        //controlsPer.movementSpeed = 20;
+        //controlsPer.noFly = false;
+        //controlsPer.lookVertical = false;
+        //controlsPer.constrainVertical = true;
+        //controlsPer.activeLook = true;
     
       }
      
@@ -406,8 +462,8 @@ renderizador.render( escena, camara );
 function loop(){
     requestAnimationFrame( loop);
     //controls.update();
-     var delta = clock.getDelta();
-    controlsPer.update(delta);// para usuario
+     //var delta = clock.getDelta();
+    //controlsPer.update(delta);// para usuario
 
 
     
@@ -444,9 +500,9 @@ function loop(){
    
    
 
-  
-
-    renderizador.render(escena,camara);
+  var temp=Personajes[0].position.clone().add(camara.offSet.clone());
+camara.position.set(temp.x,temp.y,temp.z);
+renderizador.render(escena,camara);
     
 }
 var escena,camara,renderizador,Num,clock,controlsPer,controls;
