@@ -1,33 +1,13 @@
-/*eventos,colisiones y agentes*/
-function listener(){
+  function listener(){
     camara.aspect= window.innerWidth/window.innerHeight;
     camara.updateProjectionMatrix();
     renderizador.setSize(window.innerWidth,window.innerHeight);
 }
 function push(e){
-    Personajes[0].SensarUsuario();
-    Personajes[0].ActuarUsuario();
-    if(e.keyCode===65|| e.keyCode===97){//IZQUIERDA     A
-        if(Personajes[0].rotation.y != Personajes[0].NoPI/2){Personajes[0].rotation.y = Personajes[0].NoPI/2 }
-        else if(Personajes[0].AvanzarEnabled){
-        Personajes[0].Avanzar();}
-    }
-    else if (e.keyCode===87 || e.keyCode===119){//ADELANTE   W
-         if(Personajes[0].rotation.y != Personajes[0].NoPI*0/2) {Personajes[0].rotation.y = Personajes[0].NoPI*0/2 }
-        else if(Personajes[0].AvanzarEnabled){
-        Personajes[0].Avanzar();}
-    }
-    else if (e.keyCode===68 || e.keyCode===100){//DERECHA    D
-        if(Personajes[0].rotation.y != Personajes[0].NoPI*3/2) {Personajes[0].rotation.y = Personajes[0].NoPI*3/2 }
-        else if(Personajes[0].AvanzarEnabled){
-        Personajes[0].Avanzar();}
-    }
-    else if (e.keyCode===83|| e.keyCode===115){//ATRAS       S
-         if(Personajes[0].rotation.y != Personajes[0].NoPI*2/2) {Personajes[0].rotation.y = Personajes[0].NoPI*2/2 }
-        else if(Personajes[0].AvanzarEnabled){
-        Personajes[0].Avanzar();}
-    }
-    
+    if (e.keyCode===113)
+        camara.position.z++;
+    else if(e.keyCode===81)
+        camara.position.z--;
 
 }
 function ManipularObj(){
@@ -48,7 +28,7 @@ function setup(){
 //---ejes//
 
 //---luz//
-luz1 = new THREE.PointLight( 0xFFFFFF, 1,140 );
+ luz1 = new THREE.PointLight( 0xFFFFFF, 1,140 );
 luz1.position.set( 0, 50, 0 );
 escena.add( luz1 );
 luz2 = new THREE.PointLight( 0xFFFFFF, 1, 140 );
@@ -127,10 +107,6 @@ for (var i=0;i<21;i++){
             pH[a].position.y =2;
             pH[a].name="Pared";
             escena.add(pH[a]) ;
-            pH[a].geometry.computeBoundingBox ();
-            pH[a].box = new THREE.BoxHelper( pH[a], 0x0000ff );
-            pH[a].box.position.set(-pH[a].position.x,-pH[a].position.y, -pH[a].position.z);
-            pH[a].add( pH[a].box );
             a++;
         }else if(Hor[i][j]==1&&Hor[i][j+1]==0){
             pH[a]=new THREE.Mesh(new THREE.BoxGeometry(8,4,1), new THREE.MeshLambertMaterial({map:pared} ));
@@ -139,10 +115,6 @@ for (var i=0;i<21;i++){
             pH[a].position.y =2;
             pH[a].name="Pared";
             escena.add(pH[a]) ;
-            pH[a].geometry.computeBoundingBox ();
-            pH[a].box = new THREE.BoxHelper( pH[a], 0x0000ff );
-            pH[a].box.position.set(-pH[a].position.x,-pH[a].position.y, -pH[a].position.z);
-            pH[a].add( pH[a].box );
              a++;
         }else if(Hor[i][j]==1){
             pH[a]=new THREE.Mesh(new THREE.BoxGeometry(7,4,1), new THREE.MeshLambertMaterial({map:pared} ));
@@ -151,10 +123,6 @@ for (var i=0;i<21;i++){
            pH[a].position.y =2;
            pH[a].name="Pared";
             escena.add(pH[a]) ;
-            pH[a].geometry.computeBoundingBox ();
-            pH[a].box = new THREE.BoxHelper( pH[a], 0x0000ff );
-            pH[a].box.position.set(-pH[a].position.x,-pH[a].position.y, -pH[a].position.z);
-            pH[a].add( pH[a].box );
             a++;
         }
     }    
@@ -168,10 +136,6 @@ for (var i=1;i<21;i++){
            pV[b].position.y =2;
            pV[b].name="Pared";
             escena.add(pV[b]) ;
-            pV[b].geometry.computeBoundingBox ();
-            pV[b].box = new THREE.BoxHelper( pV[b], 0xffff00 );
-            pV[b].box.position.set(-pV[b].position.x,-pV[b].position.y, -pV[b].position.z);
-            pV[b].add( pV[b].box );
             b++;
         }
     }    
@@ -179,12 +143,9 @@ for (var i=1;i<21;i++){
 //laberinto
 //--camara//
 camara=new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
-camara.position.z=-14;
-camara.position.x=3.5;
-camara.position.y=16;
-camara.offSet=   new THREE.Vector3(3.5,12,-16);
-//camara.position=camara.offSet;
-camara.rotation.set(0,Math.PI,0);
+camara.position.z=30;
+camara.position.x=30;
+camara.position.y=5;
 
 
 //--camara//
@@ -203,10 +164,10 @@ camara.rotation.set(0,Math.PI,0);
      this.VecFrente= new THREE.Vector3(0,0,1);
      this.OriginRaycaster=new THREE.Vector3(this.position.x,this.position.y+2.5,this.position.z);
      this.raycaster= new THREE.Raycaster(this.OriginRaycaster,this.VecFrente,1.5,7);
-     this.StepPerFrame=(7/4);
+     this.StepPerFrame=(7);
      this.NewPos=new THREE.Vector3(0,0,0);
      this.ObjDetectado=null;
-     this.AvanzarEnabled=false;
+     
      //Propiedades refrentes al bando
      this.bando=Bando;//red o blue, por default blue
      var Azul=new THREE.MeshBasicMaterial({color:0x0000ff});
@@ -283,10 +244,7 @@ this.random1_2=function(){
 }
          //agregar anexos    
     this.Sensar= function(){
-        if(Number.isInteger((this.position.x+3.5)/7) && Number.isInteger((this.position.z+3.5)/7)){ 
-            //solo que sense en los puntos de giro, para asi avanzar en fracciones de 7 sin tener problemas con los giros
         this.ObjDetectado=this.DetectarEnfrente();
-        }
     }
     
     this.Actuar=function(){
@@ -307,9 +265,6 @@ this.random1_2=function(){
             if(this.ObjDetectado.TipoPer==this.TipoPer){
                 console.log("matando al obj detetado");
                 escena.remove(this.ObjDetectado);
-                if(this.ObjDetectado==Personajes[0]){
-                    alert("¡HAZ MUERTO! pulsa F5 para reniciar");
-                }
             }
             else{
               var select=this.random1_2();
@@ -325,45 +280,12 @@ this.random1_2=function(){
         }
          
      }
-    //metodos de usuario
-    this.SensarUsuario= function(){
-    //    if(Number.isInteger((this.position.x+3.5)/7) && Number.isInteger((this.position.z+3.5)/7)){ 
-            //solo que sense en los puntos de giro, para asi avanzar en fracciones de 7 sin tener problemas con los giros
-        this.ObjDetectado=this.DetectarEnfrente();
-        //} del IF recordar habilitar
-    }
-    
-    this.ActuarUsuario=function(){
-         if (this.ObjDetectado==null){
-             this.AvanzarEnabled=true;
-         }
-        else if(this.ObjDetectado.name=="Pared"){
-           this.AvanzarEnabled=false;
-        }
-        else if(this.ObjDetectado.name=="Personaje"){
-            
-            if(this.ObjDetectado.TipoPer==this.TipoPer){
-                console.log("matando al obj detectado");
-                escena.remove(this.ObjDetectado);
-                alert("Haz matado a un enemigo");
-            }
-            else{
-              this.AvanzarEnabled=false;
-                
-               
-            }
-        }
-        }
-         
-     
-    //metodos de usuario
-    
      }//fin de funcion ObjetoPadre
     
     
     ObjetoPadre.prototype=new THREE.Mesh();// SE define el prototipo ObjetoPadre, heredando asi las propiedades y metodos de THREE.Mesh
  
-    CargarPer(Num=0,NumArray=0,X=3.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue"); //modificada la pos para que no inicie intersectando
+    CargarPer(Num=0,NumArray=0,X=3.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
     CargarPer(Num=1,NumArray=1,X=10.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
     CargarPer(Num=2,NumArray=2,X=17.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
     CargarPer(Num=3,NumArray=3,X=24.5,Y=0,Z=3.5,rX=0,rY=0,rZ=0,Bando="blue");
@@ -385,37 +307,12 @@ this.random1_2=function(){
    
     function funcionAgregarPer(geometry,material){
         Personajes[NumArray]= new ObjetoPadre(geometry,material,Bando,Num);//new THREE.Mesh(geometry,material);
-         Personajes[NumArray].geometry.computeBoundingBox ();
-        Personajes[NumArray].box = new THREE.BoxHelper( Personajes[NumArray], 0xffff00 );
-     //box.position.set(-Personajes[NumArray].position.x,0, -Personajes[NumArray].position.z);
-        Personajes[NumArray].add( Personajes[NumArray].box );
-        
         Personajes[NumArray].position.set(X,Y,Z);
         Personajes[NumArray].rotation.set(rX,rY,rZ);
-      
-        escena.add( Personajes[NumArray]);
-        //anadiendo caracteristicas del jugador 
-        
-        if(NumArray==0){
-     //camara.position.set(0,8,-7);
-     //camara.rotation.set(0,Math.PI,0);
-     //Personajes[NumArray].add(camara);
-     camara.lookAt(Personajes[NumArray].position);  
-     Personajes[NumArray].raycaster= new THREE.Raycaster(this.OriginRaycaster,this.VecFrente,1.5,3);
-     Personajes[NumArray].Actuar= undefined ;       
-     Personajes[NumArray].Sensar= undefined ; 
-         
-        //controlsPer = new THREE.FirstPersonControls(Personajes[NumArray]);// solo camara usuario
-        //controlsPer.lookSpeed = 0.5;
-        //controlsPer.movementSpeed = 20;
-        //controlsPer.noFly = false;
-        //controlsPer.lookVertical = false;
-        //controlsPer.constrainVertical = true;
-        //controlsPer.activeLook = true;
     
-      }
-     
-     }
+        
+        escena.add( Personajes[NumArray]);
+    }
  
     }
   
@@ -432,9 +329,9 @@ window.addEventListener(tipoEvento, listener, capturar);
 //eventos  
     
 //--controles//
-//controls = new THREE.OrbitControls( camara );    //regresar
-//controls.target=(new THREE.Vector3(70,0,70)) ;   // regresar
-//controls = new THREE.FirstPersonControls(camara);// solo camara usuario
+controls = new THREE.OrbitControls( camara );//REMPLAZADO
+controls.target=(new THREE.Vector3(70,0,70)) ;   
+//controls = new THREE.FirstPersonControls(camara);
 clock = new THREE.Clock();
        // controls.lookSpeed = 0.1;//REMPLAZADO
         //controls.movementSpeed = 20;//REMPLAZADO
@@ -461,55 +358,20 @@ renderizador.render( escena, camara );
 
 function loop(){
     requestAnimationFrame( loop);
-    //controls.update();
-     //var delta = clock.getDelta();
-    //controlsPer.update(delta);// para usuario
-
-
-    
-  for(var i=0;i<escena.children.length; i++){
-    if(escena.children[i].Sensar !== undefined)
-      escena.children[i].Sensar();
-  }
-
-
-    for(var i=0;i<escena.children.length; i++){
-    if(escena.children[i].box  !== undefined && Go)
-     var temp=Personajes[0].geometry.boundingBox.intersectsBox (escena.children[i].geometry.boundingBox );
-    if (temp){ alert("interseccion");       }    
-        
-  }
-
-    
-    
-    
-    
-    
-    
-    
-
-
-
-  for(var i=0;i<escena.children.length; i++){
-    if(escena.children[i].Actuar !== undefined)
-      escena.children[i].Actuar();
-  }
-
-
+    controls.update();
+ Personajes[6].Sensar();
+ Personajes[6].Actuar();
 
    
    
 
-  var temp=Personajes[0].position.clone().add(camara.offSet.clone());
-camara.position.set(temp.x,temp.y,temp.z);
-renderizador.render(escena,camara);
+  
+
+    renderizador.render(escena,camara);
     
 }
-var escena,camara,renderizador,Num,clock,controlsPer,controls;
-var Go=false;
+var escena,camara,renderizador,Num,clock;
 var Personajes=[];
 var PersonajesLoader=[];
 setup();
-
-    
 loop();
