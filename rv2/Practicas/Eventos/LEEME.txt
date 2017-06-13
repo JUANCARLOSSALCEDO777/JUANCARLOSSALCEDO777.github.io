@@ -1,0 +1,1 @@
+Presionar q o Q para mover  camara, vease Practica AGENTES para ver eventos mas avanzados
